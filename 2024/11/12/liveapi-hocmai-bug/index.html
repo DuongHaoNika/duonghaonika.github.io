@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Người phát hiện: Dương Quang Hào, Đinh Thái Sơn  Ngày phát hiện: 12&#x2F;11&#x2F;2024 1.Tóm tắtTrong quá trình kiểm thử bảo mật, tôi đã phát hiện một số các subdomain của hocmai.vn. Trong  đó có subdo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Report bug live-api.hocmai.vn">
+<meta property="og:url" content="https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="Người phát hiện: Dương Quang Hào, Đinh Thái Sơn  Ngày phát hiện: 12&#x2F;11&#x2F;2024 1.Tóm tắtTrong quá trình kiểm thử bảo mật, tôi đã phát hiện một số các subdomain của hocmai.vn. Trong  đó có subdo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/user-attachments/assets/f62c35bd-a6f8-40d5-bb77-de75f9835ad4">
+<meta property="og:image" content="https://github.com/user-attachments/assets/a9f85cd7-4e64-4753-bbc8-a9f8d8e92163">
+<meta property="og:image" content="https://github.com/user-attachments/assets/88ab5ab7-6815-4bc6-b3e0-0bdca01a5876">
+<meta property="og:image" content="https://github.com/user-attachments/assets/b03cf435-6e5e-4e87-8e56-791d1c6c5604">
+<meta property="og:image" content="https://github.com/user-attachments/assets/5926e70d-ab5e-4723-aeb7-22c189e11f0f">
+<meta property="og:image" content="https://github.com/user-attachments/assets/4e73259b-0451-4f1c-bbe7-2afda6c814a6">
+<meta property="og:image" content="https://github.com/user-attachments/assets/da3d8914-d0c0-4ce5-8a87-8ae925a21353">
+<meta property="og:image" content="https://github.com/user-attachments/assets/7e8dd183-5ef7-4190-be07-041d587c6f0d">
+<meta property="og:image" content="https://github.com/user-attachments/assets/ffc5b3a4-135d-4d70-878b-c88736da8004">
+<meta property="article:published_time" content="2024-11-11T17:45:24.000Z">
+<meta property="article:modified_time" content="2025-09-18T01:50:26.595Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="report">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/user-attachments/assets/f62c35bd-a6f8-40d5-bb77-de75f9835ad4">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Report bug live-api.hocmai.vn</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/05/cyradar-wu-2024/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2004/10/05/hello-world/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&text=Report bug live-api.hocmai.vn"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&is_video=false&description=Report bug live-api.hocmai.vn"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Report bug live-api.hocmai.vn&body=Check out this article: https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&name=Report bug live-api.hocmai.vn&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&t=Report bug live-api.hocmai.vn"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Tom-tat"><span class="toc-number">1.</span> <span class="toc-text">1.Tóm tắt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Muc-do-nghiem-trong-Cao"><span class="toc-number">2.</span> <span class="toc-text">2.Mức độ nghiêm trọng: Cao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Mo-ta-chi-tiet-lo-hong"><span class="toc-number">3.</span> <span class="toc-text">3.Mô tả chi tiết lỗ hổng</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Report bug live-api.hocmai.vn
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-11-11T17:45:24.000Z" class="dt-published" itemprop="datePublished">2024-11-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/report/" rel="tag">report</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><strong>Người phát hiện:</strong> Dương Quang Hào, Đinh Thái Sơn </p>
+<p><strong>Ngày phát hiện:</strong> 12&#x2F;11&#x2F;2024</p>
+<h3 id="1-Tom-tat"><a href="#1-Tom-tat" class="headerlink" title="1.Tóm tắt"></a>1.Tóm tắt</h3><p>Trong quá trình kiểm thử bảo mật, tôi đã phát hiện một số các subdomain của hocmai.vn. Trong  đó có subdomain: live-api.hocmai.vn. Trang web này có bật chế độ PHP Debugbar, có chứa  version, các log bao gồm URL, địa chỉ IP, thời gian,.. </p>
+<p><img src="https://github.com/user-attachments/assets/f62c35bd-a6f8-40d5-bb77-de75f9835ad4" alt="image"></p>
+<h3 id="2-Muc-do-nghiem-trong-Cao"><a href="#2-Muc-do-nghiem-trong-Cao" class="headerlink" title="2.Mức độ nghiêm trọng: Cao"></a>2.Mức độ nghiêm trọng: Cao</h3><ul>
+<li>Tác động: Truy cập trái phép vào cơ sở dữ liệu và có khả năng đọc&#x2F;ghi dữ liệu. </li>
+<li>Khả năng khai thác: Dễ dàng khai thác bởi các hacker chỉ cần sử dụng các công cụ tự động  hoặc các lệnh cơ bản.</li>
+</ul>
+<h3 id="3-Mo-ta-chi-tiet-lo-hong"><a href="#3-Mo-ta-chi-tiet-lo-hong" class="headerlink" title="3.Mô tả chi tiết lỗ hổng"></a>3.Mô tả chi tiết lỗ hổng</h3><p>Lỗ hổng bắt nguồn từ chế độ debug, từ các log trên, tôi truy cập URL <a target="_blank" rel="noopener" href="https://live/">https://live</a> api.hocmai.vn&#x2F;api_hocmai&#x2F;app&#x2F;rate&#x2F;current_rate mới method GET.</p>
+<p><img src="https://github.com/user-attachments/assets/a9f85cd7-4e64-4753-bbc8-a9f8d8e92163" alt="image"></p>
+<p>Khi cuộn chuột xuống dưới sẽ thấy các thông tin env như sau:</p>
+<p><img src="https://github.com/user-attachments/assets/88ab5ab7-6815-4bc6-b3e0-0bdca01a5876" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/b03cf435-6e5e-4e87-8e56-791d1c6c5604" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/5926e70d-ab5e-4723-aeb7-22c189e11f0f" alt="image"></p>
+<p>Tiến hành fuzz trang <a target="_blank" rel="noopener" href="https://live-api.hocmai.vn/">https://live-api.hocmai.vn</a> tìm thấy được path &#x2F;pma (Tương ứng  PhpMyAdmin) </p>
+<p><img src="https://github.com/user-attachments/assets/4e73259b-0451-4f1c-bbe7-2afda6c814a6" alt="image"></p>
+<p>Sau đó sử dụng cred vào trang web này để đăng nhập, vì tài khoản này là user không có quyền  root nên không thể leo quyền tuy nhiên vẫn có thể ảnh hưởng đến Database bằng việc thêm xóa  sửa (ảnh hưởng nghiêm trọng hệ thống)  </p>
+<p><img src="https://github.com/user-attachments/assets/da3d8914-d0c0-4ce5-8a87-8ae925a21353" alt="image"></p>
+<p>Dưới đây là 2 file SQL đã được leak về (Sẽ được xóa sau khi mail này được xác nhận từ phía  hocmai.vn đồng thời được vá)</p>
+<p><img src="https://github.com/user-attachments/assets/7e8dd183-5ef7-4190-be07-041d587c6f0d" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/ffc5b3a4-135d-4d70-878b-c88736da8004" alt="image"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Tom-tat"><span class="toc-number">1.</span> <span class="toc-text">1.Tóm tắt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Muc-do-nghiem-trong-Cao"><span class="toc-number">2.</span> <span class="toc-text">2.Mức độ nghiêm trọng: Cao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Mo-ta-chi-tiet-lo-hong"><span class="toc-number">3.</span> <span class="toc-text">3.Mô tả chi tiết lỗ hổng</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&text=Report bug live-api.hocmai.vn"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&is_video=false&description=Report bug live-api.hocmai.vn"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Report bug live-api.hocmai.vn&body=Check out this article: https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&title=Report bug live-api.hocmai.vn"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&name=Report bug live-api.hocmai.vn&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2024/11/12/liveapi-hocmai-bug/&t=Report bug live-api.hocmai.vn"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

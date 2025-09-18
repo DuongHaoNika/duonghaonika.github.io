@@ -1,0 +1,31 @@
+/* 1) Giữ header luôn hiện */
+#header,
+.site-header,
+header.site-header,
+header.header {
+  position: fixed;      /* dùng fixed cho chắc chắn */
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(17,17,17,.96);   /* nền để không bị chữ phía dưới chồng lên */
+  backdrop-filter: blur(6px);
+}
+
+/* 2) Vô hiệu hóa cơ chế auto-hide của theme khi scroll */
+#header.nav-up,
+#header.hide,
+.site-header.nav-up,
+.site-header.hide,
+.header.nav-up,
+.header.hide {
+  transform: none !important;
+  top: 0 !important;
+  opacity: 1 !important;
+}
+
+/* 3) Tránh nội dung bị chèn lên dưới header cố định */
+.main, .container, .content, .wrap {
+  padding-top: 64px;    /* chỉnh con số nếu header cao/thấp hơn */
+}
+
+/* 4) Khi nhảy tới tiêu đề có #anchor, đừng để bị che bởi header */
+h1, h2, h3, h4, h5, h6 { scroll-margin-top: 72px; }
