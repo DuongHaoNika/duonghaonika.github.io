@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Challenges: https:&#x2F;&#x2F;github.com&#x2F;DuongHaoNika&#x2F;CTF&#x2F;tree&#x2F;main&#x2F;securinets PuzzleĐầu tiên, truy cập chức năng login   Đây là code xử lý đăng ký tài khoản tại file auth.py   Nhận thấy khi đăng ký tài khoản,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup Securinets CTF Quals 2025 [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="Challenges: https:&#x2F;&#x2F;github.com&#x2F;DuongHaoNika&#x2F;CTF&#x2F;tree&#x2F;main&#x2F;securinets PuzzleĐầu tiên, truy cập chức năng login   Đây là code xử lý đăng ký tài khoản tại file auth.py   Nhận thấy khi đăng ký tài khoản,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image2.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image1.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image3.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image4.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image5.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image6.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image7.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image8.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image9.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image10.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image11.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image12.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image13.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image14.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image15.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image16.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image17.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image18.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image19.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image20.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image21.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image22.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image23.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image24.png">
+<meta property="article:published_time" content="2025-10-05T07:37:52.000Z">
+<meta property="article:modified_time" content="2025-10-05T16:22:33.972Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image2.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Writeup Securinets CTF Quals 2025 [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/09/15/android-pentest/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&text=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&is_video=false&description=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Securinets CTF Quals 2025 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&name=Writeup Securinets CTF Quals 2025 [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&t=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Writeup Securinets CTF Quals 2025 [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-10-05T07:37:52.000Z" class="dt-published" itemprop="datePublished">2025-10-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Challenges: <a target="_blank" rel="noopener" href="https://github.com/DuongHaoNika/CTF/tree/main/securinets">https://github.com/DuongHaoNika/CTF/tree/main/securinets</a></p>
+<h2 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h2><p>Đầu tiên, truy cập chức năng login</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image2.png" class="">
+
+<p>Đây là code xử lý đăng ký tài khoản tại file <code>auth.py</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image1.png" class="">
+
+<p>Nhận thấy khi đăng ký tài khoản, mặc định người dùng được chỉ định role <code>user</code> –&gt; Ta có thể chỉnh sửa request gửi lên để nhận role <code>editor</code> (Không thể sửa role &#x3D; 0 lên admin vì bị chặn).</p>
+<p>Sử dụng Burp Suite để intercept request, đây là request gốc khi đăng ký tài khoản mới</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image3.png" class="">
+
+<p>Sau đó thêm <code>role</code> với giá trị <code>1</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image4.png" class="">
+
+<p>Đọc code trong file <code>routes.py</code> thấy có file database</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image5.png" class="">
+
+<img src="/2025/10/05/securinets-ctf-quals-2025/image6.png" class="">
+
+<p>Đây là nội dung file database, bao gồm các thông tin như uuid, username, password, role,… </p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image7.png" class="">
+
+<p>Chú ý thông tin của admin</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image8.png" class="">
+
+<p>Tiếp tục đọc code trong <code>routes.py</code> phát hiện 1 API cho phép lấy thông tin người dùng qua <code>uuid</code>, chức năng này chỉ cho phép admin hoặc editor dùng</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image9.png" class="">
+
+<p>Vậy là đã có <code>uuid</code>, kết hợp API trên thì có được thông tin của <code>admin</code>. Nhưng không, đúng như tên file <code>old.db</code>. Khi dùng <code>uuid</code> admin trong <code>old.db</code> -&gt; Lỗi: <code>&#123;&quot;error&quot;:&quot;User not found&quot;&#125;</code></p>
+<p>Bây giờ tìm <code>uuid</code> của admin theo cách khác.</p>
+<p>Web này có chức năng up bài báo cùng collab, ta thử chức năng này, ở đây cho collab với tài khoản khác của mình.</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image10.png" class="">
+
+<p>Sau đó qua tài khoản này kiểm tra, vào Collaborations và Accept</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image11.png" class="">
+
+<p>Như vậy là đã collab thành công rồi</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image12.png" class="">
+
+<p>Thử bấm vào để đọc xem, nhận thấy response chứa hẳn <code>uuid</code> của người đăng và người collab cùng</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image13.png" class="">
+
+<p>Vậy là xong cách lấy <code>uuid</code> của người khác, nhưng làm thế nào để người này accept collab với mình?</p>
+<p>Mò lại Proxy thì thấy request sau khi người dùng accept collab</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image14.png" class="">
+
+<p>Đây là code xử lý</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image15.png" class="">
+
+<p>&#x3D;&gt; Chỉ cần có request uuid, ta có thể accept được mọi collab mặc dù người collab không hề bấm Accept.<br>Như vậy flow để leo lên admin là collab với admin, sau đó accept request collab để lấy <code>uuid</code> của admin, cuối cùng thì sử dụng API với <code>uuid</code> là lấy được thông tin của admin.</p>
+<p>Bây giờ thực hiện collab với <code>admin</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image16.png" class="">
+
+<p>Sau đó vào tab Collaborations, mở Burp lấy request uuid, copy lấy uuid này</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image17.png" class="">
+
+<p>Sau đó thay <code>uuid</code> này vào request accept collab và gửi là được</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image18.png" class="">
+
+<p>Collab thành công với <code>admin</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image19.png" class="">
+
+<p>Lấy <code>uuid</code> của admin</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image20.png" class="">
+
+<p>Gọi API lấy thông tin của admin qua <code>uuid</code>, lấy được username, password,…</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image21.png" class="">
+
+<p>Đăng nhập vào tài khoản admin, admin có thể truy cập vào <code>/data/</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image22.png" class="">
+
+<p>Sau khi truy cập, tải được file <code>secrets.zip</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image23.png" class="">
+
+<p>Để mở file zip này thì cần mật khẩu, khả năng flag nằm trong đây. Mình đã thử chạy wordlist nhưng không chưa mở được. Ở <code>/data</code> còn có cả <code>dbconnect.exe</code>, khả năng là file thực thi để kết nối với database. Mở Kali và grep xem có password lưu trong <code>dbconnect.exe</code> không (Dùng IDA cũng được) -&gt; Tìm thấy password</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image24.png" class="">
+
+<p>Đây cũng là password mở file zip luôn, lấy được flag</p>
+<p>Flag: <code>Securinets&#123;777_P13c3_1T_Up_T0G3Th3R&#125;</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&text=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&is_video=false&description=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Securinets CTF Quals 2025 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&title=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&name=Writeup Securinets CTF Quals 2025 [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/&t=Writeup Securinets CTF Quals 2025 [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
