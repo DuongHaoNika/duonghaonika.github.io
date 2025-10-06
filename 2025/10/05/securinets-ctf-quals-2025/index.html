@@ -37,8 +37,17 @@
 <meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image22.png">
 <meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image23.png">
 <meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image24.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image25.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image26.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image27.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image28.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image29.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image30.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image31.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image32.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/10/05/securinets-ctf-quals-2025/image33.png">
 <meta property="article:published_time" content="2025-10-05T07:37:52.000Z">
-<meta property="article:modified_time" content="2025-10-05T16:22:33.972Z">
+<meta property="article:modified_time" content="2025-10-06T17:12:26.428Z">
 <meta property="article:author" content="Duong Quang Hao">
 <meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
@@ -138,7 +147,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#S3cret5"><span class="toc-number">2.</span> <span class="toc-text">S3cret5</span></a></li></ol>
       </div>
     
   </span>
@@ -262,6 +271,46 @@
 
 <p>Đây cũng là password mở file zip luôn, lấy được flag</p>
 <p>Flag: <code>Securinets&#123;777_P13c3_1T_Up_T0G3Th3R&#125;</code></p>
+<h2 id="S3cret5"><a href="#S3cret5" class="headerlink" title="S3cret5"></a>S3cret5</h2><p>Đầu tiên đăng ký 1 tài khoản rồi đăng nhập. Bài này có chức năng report URL (<code>/routes/report.js</code>)</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image25.png" class="">
+
+<p>Ta chỉ được phép report các URL bắt đầu với <code>http://localhost:3000</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image26.png" class="">
+
+<p>Con bot này đăng nhập tài khoản <code>admin</code> rồi truy cập vào URL do người dùng cung cấp.</p>
+<p>Để ý thì thấy có chức năng <code>addAdmin</code> (<code>userController.js</code>) và chỉ admin mới thực hiện được</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image27.png" class="">
+
+<p>Nội dung của đề như sau:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">My friend built a “secure” secret vault where anyone can register, log in, and save private secrets. He swears it’s fully secure: owner-only access, CSRF protection, logs. Prove him wrong.</span><br><span class="line"></span><br><span class="line">author: Enigma522</span><br></pre></td></tr></table></figure>
+
+<p>Nên khả năng cần khai thác lỗi CSRF. Mà web này có cơ chế bảo vệ CSRF, làm sao để bypass được?</p>
+<p><code>/views/profile.ejs</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image28.png" class="">
+
+<p>Khi truy cập vào profile, script trên được chạy để ghi log. Mà <code>profileIds</code> là 1 mảng chứa các <code>id</code>, <code>profileId</code> là phần tử cuối của mảng. Sau đó fetch <code>/log/+profileId</code> kèm với CSRF token và userId của profile này. Có thể thấy <code>profileId</code> không hề được validate và cộng chuỗi luôn -&gt; <code>Path Traversal</code>. Ta sẽ report URL là <code>http://localhost:3000/user/profile?id=&lt;userId&gt;&amp;id=../admin/addAdmin</code> với <code>userId</code> là id người dùng của bạn, <code>/log/+../admin/addUser</code> -&gt; <code>/admin/addUser</code> và body có <code>userId: &quot;&lt;%= user.id %&gt;&quot;</code> chính là id của profile (của bạn) và <code>_csrf</code> của admin được đính kèm luôn, như vậy có thể nâng cấp tài khoản của bạn lên admin.</p>
+<p>Ở đây, <code>userId</code> của mình là <code>2</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image29.png" class="">
+
+<p>Khi đó URL để report là</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:3000/user/profile?id=2&amp;id=../admin/addAdmin</span><br></pre></td></tr></table></figure>
+
+<p>Lên được admin</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image30.png" class="">
+
+<p>Admin có chức năng tìm kiếm các messages của toàn bộ người dùng</p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image31.png" class="">
+
+<p>Flow tìm kiếm</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt; controllers/adminController.showMsgs</span><br><span class="line">--&gt; models/Msg.js</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/10/05/securinets-ctf-quals-2025/image32.png" class="">
+
+<p>Thấy <code>clause</code> là điều kiện <code>WHERE</code> và  được nối vào câu SQL, sau đó đưa vào query -&gt; <code>SQL Injection</code>.</p>
+<p><code>filterHelper.js</code></p>
+<img src="/2025/10/05/securinets-ctf-quals-2025/image33.png" class="">
+
+<p>Cho <code>filterBy</code> là <code>type&quot;=&#39;general&#39;+and+((SELECT+SUBSTRING(flag,1,1)+FROM+flags)=&#39;S&#39;)+and+msgs.&quot;msg</code> để tìm flag.</p>
 
   </div>
 </article>
@@ -289,7 +338,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Puzzle"><span class="toc-number">1.</span> <span class="toc-text">Puzzle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#S3cret5"><span class="toc-number">2.</span> <span class="toc-text">S3cret5</span></a></li></ol>
       </div>
     
 
